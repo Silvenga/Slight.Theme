@@ -36,6 +36,7 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 * Many mobile style fixes.
 * Many screen size fixes.
 * Menu fixes.
+
 1.0.0
 * First release. 
 

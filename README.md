@@ -3,7 +3,7 @@ Version 1.02
 
 Ghost 0.4.2 compatibility
 
-[Theme Download](http://store.silvenga.com/Slight.zip)
+[Theme Download](http://r.silvenga.com/slightdownload)
 
 ## Introduction
 

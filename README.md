@@ -32,10 +32,10 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 ## Change Log
 
 1.0.2 - 6/5/2014
-* Javascript issues fixes. 
+* Javascript issue fixes. 
 * Page loading is much faster now.
-* Reduction in size
-* Simple lightbox for images. 
+* Reduction in size.
+* Simple light box for images. 
 * Better image handling.
 * Many mobile style fixes.
 * Many screen size fixes.
@@ -45,6 +45,9 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 * First release. 
 
 ## Install
+
+To reach optimal size the user must recompile the code after making any edits. Ensure that NPM is installed and working. 
+
 * Run `npm install` to ensure that the development environment is ready. 
 * Run `grunt watch` to automatically compile code in the `/Slight` directory. 
 * Modify header and footer links in `./src/default.hbs`.

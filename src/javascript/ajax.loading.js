@@ -57,9 +57,6 @@ jQuery(function ($) {
 				try {
 					
 					start();
-					_paq.push(['setDocumentTitle', $("#title").text()]);
-					_paq.push(['setCustomUrl', state.url]);
-					_paq.push(['trackPageView']);
 				}
 				catch (err) {
 					console.log(err);

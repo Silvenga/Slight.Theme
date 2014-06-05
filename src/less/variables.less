@@ -1,0 +1,108 @@
+/**
+// Typography vars
+**/
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(/assets/fonts/opensans.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Oxygen'), local('Oxygen-Regular'), url(/assets/fonts/oxygen.woff) format('woff');
+}
+
+//@font-face {
+//    font-family: 'Lato';
+//    font-style: normal;
+//    font-weight: 400;
+//    src: local('Lato'), local('Lato'), url(/assets/fonts/lato.woff) format('woff');
+//}
+
+@default_font: 'Open Sans', Arial, Helvetica, sans-serif;
+// @default_font: 'Lato', Arial, Helvetica, sans-serif;
+@header_font: 'Oxygen', Arial, Helvetica, sans-serif;
+
+
+/**
+// Layout vars
+**/
+
+// Golden ratio, which makes just about anything look lovely
+@golden: 1.618;
+@readable_width: 36em;
+
+
+/**
+// Color vars
+**/
+
+@accent: #D74B4B;
+@bg-light: #EFF0EA;
+@bg-dark: #475F77;
+@header: #354B5E;
+@header-alt: #1A252E;
+
+@link: #707070;
+@link-visited: #707070;
+@link-hover: #354B5E;
+
+h1 {
+    color: @header;
+    font-weight: 300;
+}
+
+h2 {
+    color: @header;
+    font-weight: 300;
+}
+
+h3 {
+    color: @header;
+    font-weight: 300;
+}
+
+h4 {
+    color: @header;
+    font-weight: 300;
+}
+
+h5 {
+    color: @header;
+    font-weight: 400;
+}
+
+h6 {
+    color: @header;
+    font-weight: 400;
+}
+
+a {
+    background: transparent;
+    color: @link;
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    border-bottom: 1px solid fade(@link, 0);
+}
+
+    a:hover {
+        background: transparent;
+        color: @link-hover;
+        border-bottom: 1px solid @link-hover;
+    }
+
+article > a {
+    border-bottom: 1px solid fade(@link, 30%);
+}
+
+body {
+    margin: 0;
+    font-family: @default_font;
+    line-height: @golden;
+    font-weight: 400;
+    font-size: 1.1em;
+}

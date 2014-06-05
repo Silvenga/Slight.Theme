@@ -1,0 +1,86 @@
+/**
+// Mixins
+**/
+
+.HeaderFont () {
+    font-family: @header_font;
+    line-height: 1.313em;
+}
+
+/**
+// Styles
+**/
+
+body {
+    margin: 0;
+    font-family: @default_font;
+    line-height: @golden + .1em;
+}
+
+a {
+    text-decoration: none;
+    background: transparent;
+}
+
+    a:link, a:visited {
+    }
+
+    a:focus {
+        outline: thin dotted;
+    }
+
+    a:active,
+    a:hover {
+        outline: 0;
+    }
+
+.postcontent {
+    text-align: left;
+}
+
+h1 {
+    .HeaderFont;
+    font-size: 3em;
+    margin: 0.563em 0;
+}
+
+h2 {
+    .HeaderFont;
+    font-size: 2.25em;
+    margin: 0.625em 0;
+}
+
+h3 {
+    .HeaderFont;
+    font-size: 1.5em;
+    margin: 1.313em 0;
+}
+
+h4 {
+    .HeaderFont;
+    font-size: 1.313em;
+    margin: 1.313em 0;
+}
+
+h5 {
+    .HeaderFont;
+    font-size: 1.125em;
+    margin: 1.313em 0;
+}
+
+h6 {
+    .HeaderFont;
+    font-size: 1em;
+    margin: 0.75em 0;
+}
+
+code, pre {
+    background: #f1f0ea;
+    border-radius: 2px;
+    padding: 5px 3px;
+}
+
+.gist {
+
+    font-size: 0.9em;
+}

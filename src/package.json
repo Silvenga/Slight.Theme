@@ -1,0 +1,14 @@
+{
+    "name": "SlightTheme",
+    "version": "1.0.2",
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-uglify": "latest",
+        "grunt-contrib-cssmin": "latest",
+        "grunt-contrib-watch": "latest",
+        "grunt-contrib-clean": "latest",
+        "grunt-contrib-htmlmin": "latest",
+        "grunt-contrib-copy": "latest",
+        "assemble-less": "latest"
+    }
+}

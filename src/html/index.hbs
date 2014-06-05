@@ -1,0 +1,17 @@
+<div class="hover-parrent all-posts accordion vertical">
+    {{#foreach posts}}
+    <section class="hover-parrent sliders">
+        <div class="post parent-table">
+            <h3 class="left-cell">
+                <a href="{{{url}}}">{{title}}</a>
+            </h3>
+            <h3 class="right-cell text-righted post-date">{{date format='MMM D, YYYY'}}</h3>
+        </div>
+        <div class="post-excerpt">
+            {{excerpt characters="300"}}...
+        </div>
+    </section>
+    {{/foreach}}
+</div>
+    {{pagination}}
+<!--{{!< default}}-->

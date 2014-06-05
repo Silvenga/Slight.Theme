@@ -5,6 +5,7 @@ Ghost 0.4.2 compatibility
 
 [Theme Download](http://store.silvenga.com/Slight.zip)
 
+## Introduction
 
 A minimal theme, powered by Ghost. Live Demo: (https://silvenga.com)
 
@@ -23,6 +24,20 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 ## Screenshots
 
 ![](https://store.silvenga.com/slight-screenshot.png)
+
+## Change Log
+
+1.0.2 - 6/5/2014
+* Javascript issues fixes. 
+* Page loading is much faster now.
+* Reduction in size
+* Simple lightbox for images. 
+* Better image handling.
+* Many mobile style fixes.
+* Many screen size fixes.
+* Menu fixes.
+1.0.0
+* First release. 
 
 ## Install
 * Run `npm install` to ensure that the development environment is ready. 

@@ -42,10 +42,11 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 
 ## Install
 * Run `npm install` to ensure that the development environment is ready. 
-* Run `grunt watch` to automatically compile code the the `/Slight` directory. 
+* Run `grunt watch` to automatically compile code in the `/Slight` directory. 
 * Modify header and footer links in `./src/default.hbs`.
-* Modify disqus_shortname to your own on line 31 of `./src/js/master.js`.
+* Modify disqus_shortname to your own on line 3 of `./src/js/master.js`.
 * Modify links for the menu system in `./src/html/partials/menu.hbs`.
+* Modify links for the sidebar in `./src/html/partials/sidebar.hbs`.
 * Add the Slight folder to `./content/themes` of your Ghost installation
 * Restart Ghost
 * Select theme under that administration tools within Ghost

@@ -98,6 +98,7 @@ module.exports = function (grunt) {
                     '<%= theme_name %>/post.hbs': 'html/post.hbs', 
                     '<%= theme_name %>/partials/menu.hbs': 'html/partials/menu.hbs',
                     '<%= theme_name %>/partials/pagination.hbs': 'html/partials/pagination.hbs',
+                    '<%= theme_name %>/partials/sidebar.hbs': 'html/partials/sidebar.hbs',
                 }
             }
         },

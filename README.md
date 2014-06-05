@@ -1,7 +1,7 @@
 # Slight 
-## Version 1.02
-## Ghost 0.4.2 compatibility
-## [Theme Download](http://store.silvenga.com/external/Slight.zip)
+Version 1.02
+Ghost 0.4.2 compatibility
+[Theme Download](http://store.silvenga.com/external/Slight.zip)
 
 A minimal theme, powered by Ghost. Live Demo: (https://silvenga.com)
 

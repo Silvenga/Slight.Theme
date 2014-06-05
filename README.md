@@ -23,6 +23,10 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 
 ## Screenshots
 
+![](http://i.imgur.com/Yib6qzO.png)
+
+![](http://i.imgur.com/rZaPIdx.png)
+
 ![](https://store.silvenga.com/slight-screenshot.png)
 
 ## Change Log

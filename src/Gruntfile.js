@@ -2,33 +2,43 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
         watch: {
             less: {
                 files: [
                     'less/*'
                 ],
-                tasks: ['less', 'uglify', 'cssmin', 'htmlmin', 'copy', 'clean']
+                tasks: ['compile']
             },
             js: {
                 files: [
                     'javascript/*'
                 ],
-                tasks: ['less', 'uglify', 'cssmin', 'htmlmin', 'copy', 'clean']
+                tasks: ['compile']
             },
             css: {
                 files: [
                     'css/*'
                 ],
-                tasks: ['less', 'uglify', 'cssmin', 'htmlmin', 'copy', 'clean']
+                tasks: ['compile']
             },
             html: {
                 files: [
                     'html/*',
                     'html/partials/*'
                 ],
-                tasks: ['less', 'uglify', 'cssmin', 'htmlmin', 'copy', 'clean']
+                tasks: ['compile']
+            },
+            other: {
+                files: [
+                    'other/*'
+                ],
+                tasks: ['compile']
             }
+        },
+        compile: {
+            target1: ['less', 'uglify', 'htmlmin'],
+            target2: ['cssmin'],
+            target3: ['copy', 'clean']
         },
         uglify: {
             options: {
@@ -95,7 +105,7 @@ module.exports = function (grunt) {
                     '<%= theme_name %>/default.hbs': 'html/default.hbs',
                     '<%= theme_name %>/error.hbs': 'html/error.hbs',
                     '<%= theme_name %>/index.hbs': 'html/index.hbs',
-                    '<%= theme_name %>/post.hbs': 'html/post.hbs', 
+                    '<%= theme_name %>/post.hbs': 'html/post.hbs',
                     '<%= theme_name %>/partials/menu.hbs': 'html/partials/menu.hbs',
                     '<%= theme_name %>/partials/pagination.hbs': 'html/partials/pagination.hbs',
                     '<%= theme_name %>/partials/sidebar.hbs': 'html/partials/sidebar.hbs',
@@ -125,7 +135,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            css: ["<%= theme_name %>/css/compiled.css"],
+            css: ["/css/compiled.css"],
         },
         'theme_name': "../Slight"
     });
@@ -137,5 +147,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
-
+    grunt.loadNpmTasks('grunt-concurrent');
 };

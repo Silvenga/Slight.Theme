@@ -9,6 +9,7 @@
         "grunt-contrib-clean": "latest",
         "grunt-contrib-htmlmin": "latest",
         "grunt-contrib-copy": "latest",
-        "assemble-less": "latest"
+        "assemble-less": "latest",
+        "grunt-concurrent": "latest"
     }
 }

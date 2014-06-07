@@ -7,35 +7,35 @@ module.exports = function (grunt) {
                 files: [
                     'less/*'
                 ],
-                tasks: ['compile']
+                tasks: ['concurrent']
             },
             js: {
                 files: [
                     'javascript/*'
                 ],
-                tasks: ['compile']
+                tasks: ['concurrent']
             },
             css: {
                 files: [
                     'css/*'
                 ],
-                tasks: ['compile']
+                tasks: ['concurrent']
             },
             html: {
                 files: [
                     'html/*',
                     'html/partials/*'
                 ],
-                tasks: ['compile']
+                tasks: ['concurrent']
             },
             other: {
                 files: [
                     'other/*'
                 ],
-                tasks: ['compile']
+                tasks: ['concurrent']
             }
         },
-        compile: {
+        concurrent: {
             target1: ['less', 'uglify', 'htmlmin'],
             target2: ['cssmin'],
             target3: ['copy', 'clean']

@@ -1,5 +1,5 @@
 # Slight 
-Version 1.02
+Version 1.05
 
 Ghost 0.4.2 compatibility
 
@@ -30,6 +30,17 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 ![](https://store.silvenga.com/slight-screenshot.png)
 
 ## Change Log
+
+1.0.5 - 6/5/2014
+* Fixed comment issues with loading via ajax.
+* Streamlined ajax loading.
+* Using jquery.lazyView (https://github.com/Silvenga/jquery-lazyView).
+* Fixes issues with mobile devices (iPhone).
+* Fixed IE11 issues.
+* Fixed web-kit CSS issues.
+* Streamlined grunt building.
+* Javascript fixes.
+* Style fixes.
 
 1.0.2 - 6/5/2014
 * Javascript issue fixes. 

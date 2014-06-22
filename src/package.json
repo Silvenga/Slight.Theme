@@ -1,6 +1,6 @@
 {
     "name": "SlightTheme",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "devDependencies": {
         "grunt": "latest",
         "grunt-contrib-uglify": "latest",

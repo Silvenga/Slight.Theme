@@ -31,7 +31,7 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 
 ## Change Log
 
-1.0.5 - 6/5/2014
+1.0.5 - 6/21/2014
 * Fixed comment issues with loading via ajax.
 * Streamlined ajax loading.
 * Using jquery.lazyView (https://github.com/Silvenga/jquery-lazyView).

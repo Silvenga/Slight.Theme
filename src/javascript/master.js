@@ -3,9 +3,8 @@
 var disqus_shortname = 'silvenga-blog-ghost';
 
 //////////////////////////////////////////////////
-function start() {
 
-    peak();
+function start() {
 
     $(".hover-parrent").on("mouseenter", function () {
 
@@ -22,7 +21,7 @@ function start() {
         $(this).addClass("onhover");
     });
 
-    $(window).scroll(function() {
+    $(window).scroll(function () {
 
         if ($(document).scrollTop() > 50) {
 
@@ -35,20 +34,38 @@ function start() {
 
     sizeForScroll();
 
-    // Reset the comments script
-    $("#disqus_script").remove();
+    try {
 
-    // if id is seen, then run the comments script
-    if ($("#disqus_thread").length > 0) {
-        var disqus_identifier = $("#page-id").text();
-        (function () {
-            var dsq = document.createElement('script');
-            dsq.id = "disqus_script";
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
+
+        // if id is seen, then run the comments reset script
+        if ($("#disqus_script").length > 0) {
+
+            DISQUS.reset({
+                reload: true,
+                config: function () {
+                    this.page.identifier = $("#page-id").text();
+                    this.page.url = history.getState().url;
+                }
+            });
+
+        } else if ($("#disqus_thread").length > 0 && $("#disqus_script").length == 0) {
+
+            // Reset the comments script?
+            $("#disqus_script").remove();
+
+            var disqus_identifier = $("#page-id").text();
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.id = "disqus_script";
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        }
+    }
+    catch (err) {
+        console.log(err);
     }
 
     // Download Gists
@@ -59,22 +76,19 @@ function start() {
         console.log(err);
     }
 
+    try {
+        $("#ajax-container").lazyView();
+    }
+    catch (err) {
+        console.log(err);
+    }
+
 
     // Lightbox
     attachLightBox();
 }
 
-function peak() {
-
-    setTimeout(function () {
-
-        $(".post-excerpt").css("padding-top", "0.5em");
-        setTimeout(function () {
-            $(".post-excerpt").delay(200).css("padding-top", "");
-        }, 400);
-
-    }, 800);
-}
+$("body").lazyView();
 
 start();
 
@@ -113,7 +127,7 @@ function sizeForScroll() {
 
 function isScrollBar() {
 
-    return $("body").get(0).scrollHeight > $("body").get(0).clientHeight;
+    return $("body")[0].scrollHeight > $("body")[0].clientHeight;
 }
 
 function getScrollBar() {

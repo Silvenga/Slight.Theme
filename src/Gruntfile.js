@@ -38,7 +38,13 @@ module.exports = function (grunt) {
         concurrent: {
             target1: ['less', 'uglify', 'htmlmin'],
             target2: ['cssmin'],
-            target3: ['copy', 'clean']
+            target3: ['autoprefixer'],
+            target4: ['copy', 'clean']
+        },
+        autoprefixer: {
+            files: {
+                src: 'css/*.css'
+            }
         },
         uglify: {
             options: {
@@ -148,4 +154,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 };

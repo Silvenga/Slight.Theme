@@ -1,84 +1,102 @@
 ﻿function isExternal(url) {
-	if (url.indexOf("mailto:") === 0) return true; 
-	var match = url.match(/^([^:\/?#]+:)?(?:\/\/([^\/?#]*))?([^?#]+)?(\?[^#]*)?(#.*)?/);
-	if (typeof match[1] === "string" && match[1].length > 0 && match[1].toLowerCase() !== location.protocol) return true;
-	if (typeof match[2] === "string" && match[2].length > 0 && match[2].replace(new RegExp(":(" + { "http:": 80, "https:": 443 }[location.protocol] + ")?$"), "") !== location.host) return true;
-	return false;
+    if (url.indexOf("mailto:") === 0) return true;
+    var match = url.match(/^([^:\/?#]+:)?(?:\/\/([^\/?#]*))?([^?#]+)?(\?[^#]*)?(#.*)?/);
+    if (typeof match[1] === "string" && match[1].length > 0 && match[1].toLowerCase() !== location.protocol) return true;
+    if (typeof match[2] === "string" && match[2].length > 0 && match[2].replace(new RegExp(":(" + { "http:": 80, "https:": 443 }[location.protocol] + ")?$"), "") !== location.host) return true;
+    return false;
 }
 
 jQuery(function ($) {
 
-	var history = window.History;
-	var $ajaxContainer = $('#ajax-container'); 
+    var history = window.History;
+    var $ajaxContainer = $('#ajax-container');
 
-	if (!history.enabled) {
+    if (!history.enabled) {
+        console.log("Ajax not supported. :(");
+        return false;
+    }
 
-		console.log("Ajax not supported. :(");
-		return false;
-	}
+    // Make the ajax status bar
+    Pace.start();
+    Pace.restart();
 
-	Pace.start(); 
-	Pace.restart();
+    history.Adapter.bind(window, 'statechange', function () {
 
-	history.Adapter.bind(window, 'statechange', function () {
+        var state = history.getState();
 
-		var state = history.getState();
+        // Move user to top of page (mainly for phone users)
+        $('html, body').animate({ 'scrollTop': 0 });
 
-		$('html, body').animate({ 'scrollTop': 0 });
+        // Fade out to ajax
+        $("#main-footer").fadeOut(100);
+        $ajaxContainer.fadeOut(100);
 
+        // Hate the flashing scoll
+        sizeForScroll();
 
-		$("#main-footer").fadeOut(200);
+        $('#ajax-container').load(state.url + ' #ajax-content', function (response, status, xhr) {
 
-		sizeForScroll(); 
+            // Anything happened?
+            if (status != "success" && status != "notmodified") {
 
-		$ajaxContainer.fadeOut(200, function () {
+                var msg = $('<div>', { html: response });
+                msg = msg.find('#ajax-content').html();
 
-			$('#ajax-container').load(state.url + ' #ajax-content', function(response, status, xhr) {
+                $("#ajax-container").html(msg);
+            }
 
-				if (status == "error") {
+            // We are removing title info, get it before its gone.
+            document.title = $("#title").text();
 
-					var msg = $('<div>', { html: response });
-					msg = msg.find('#ajax-content').html();
+            // We lost conntent, most likely need to resize for the missing scoll bar
+            sizeForScroll();
 
-					$("#ajax-container").html(msg);
-				}
+            // Unhide
+            $ajaxContainer.fadeIn(0);
+            $("#main-footer").fadeIn(0, function() {
+                 Pace.stop();
+            });
 
-				document.title = $("#title").text();
+            // Move to top
+            $('html, body').animate({
+                scrollTop: $("#ajax-content").offset().top - 90
+            }, 400);
 
-				sizeForScroll();
+            // Run the scripts after ajax (ajax looses scripts)
+            try {
+                start();
+            }
+            catch (err) {
+                console.log(err);
+            }
 
-				$ajaxContainer.fadeIn(100);
-				$("#main-footer").fadeIn(400, function () { Pace.stop(); });
+            // My own analytics, may fail, but we handle anyway 
+            try {
+                _paq.push(['setDocumentTitle', $("#title").text()]);
+                _paq.push(['setCustomUrl', state.url]);
+                _paq.push(['trackPageView']);
+            }
+            catch (err) {}
+        });
+    });
 
-				$('html, body').animate({
-					scrollTop: $("#ajax-content").offset().top - 90
-				}, 400);
-				
-				try {
-					
-					start();
-				}
-				catch (err) {
-					console.log(err);
-				}
-			});
-		});
-	});
+    $('body').on('click', 'a', function (e) {
 
-	$('body').on('click', 'a', function (e) {
+        // Figure out if like that we can ajax
+        if (isExternal($(this).attr('href')) || $(this).hasClass('light-box'))
+            return true;
 
-		if (isExternal($(this).attr('href')) || $(this).hasClass('light-box'))
-			return true;
+        // The link is ajaxible, disable normal action
+        e.preventDefault();
 
-		e.preventDefault();
+        // Then do the request
+        var currentState = history.getState();
+        var url = $(this).attr('href');
+        var title = $(this).attr('title') || null;
 
-		var currentState = history.getState();
-		var url = $(this).attr('href');
-		var title = $(this).attr('title') || null;
+        if (url !== currentState.url.replace(/\/$/, "")) {
 
-		if (url !== currentState.url.replace(/\/$/, "")) {
-
-			history.pushState({}, title, url);
-		}
-	});
+            history.pushState({}, title, url);
+        }
+    });
 });

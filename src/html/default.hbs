@@ -7,16 +7,16 @@
     {{! Page Meta }}
     <title>{{meta_title}}</title>
     <meta name="description" content="{{meta_description}}" />
-    {{! Responsive Meta Tags }} 
-    <meta name="HandheldFriendly" content="True" /> 
+    {{! Responsive Meta Tags }}
+    <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{! Ghost head}}
-    {{ghost_head}}   
-    {{! Styles }} 
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" /> 
-</head> 
-<body class="{{body_class}}">
-    <header id="header"> 
+    {{ghost_head}}
+    {{! Styles }}
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+</head>
+<body class="{{body_class}}" style="visibility: hidden">
+    <header id="header">
         {{#if @blog.logo}}
         <a id="logo" href="/"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
         {{/if}}
@@ -25,7 +25,7 @@
         {{> sidebar}}
     </header>
     {{> menu}}
-    <div id="ajax-container" class="content wrapper">
+    <div id="ajax-container" class="content wrapper" style="visibility: hidden">
         <div class="" id="ajax-content">
             {{{body}}}
             <div class="hidden" id="title">{{meta_title}}</div>
@@ -40,9 +40,7 @@
     {{! jQuery}}
     <script src="/assets/js/jquery.min.js"></script>
     {{! Pace, Git-Embed, jQuery History}}
+    <script async src="/assets/js/jquery.lazyView.js"></script>
     <script async src="/assets/js/pack.min.js"></script>
-    {{! Piwik}}
-    
-    {{! End Piwik Code}}
 </body>
 </html>

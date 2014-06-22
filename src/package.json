@@ -10,6 +10,7 @@
         "grunt-contrib-htmlmin": "latest",
         "grunt-contrib-copy": "latest",
         "assemble-less": "latest",
-        "grunt-concurrent": "latest"
+        "grunt-concurrent": "latest",
+        "grunt-autoprefixer": "latest"
     }
 }

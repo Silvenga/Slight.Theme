@@ -3,42 +3,53 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
-            less: {
-                files: [
-                    'less/*'
-                ],
-                tasks: ['concurrent']
-            },
-            js: {
-                files: [
-                    'javascript/*'
-                ],
-                tasks: ['concurrent']
-            },
-            css: {
-                files: [
-                    'css/*'
-                ],
-                tasks: ['concurrent']
-            },
-            html: {
-                files: [
-                    'html/*',
-                    'html/partials/*'
-                ],
-                tasks: ['concurrent']
-            },
+            //            less: {
+            //                files: [
+            //                    'less/*'
+            //                ],
+            //                tasks: ['concurrent']
+            //            },
+            //            js: {
+            //                files: [
+            //                    'javascript/*'
+            //                ],
+            //                tasks: ['concurrent']
+            //            },
+            //            css: {
+            //                files: [
+            //                    'css/*'
+            //                ],
+            //                tasks: ['concurrent']
+            //            },
+            //            html: {
+            //                files: [
+            //                    'html/*',
+            //                    'html/partials/*'
+            //                ],
+            //                tasks: ['concurrent']
+            //            },
+            //            other: {
+            //                files: [
+            //                    'other/*'
+            //                ],
+            //                tasks: ['concurrent']
+            //                        }
             other: {
                 files: [
-                    'other/*'
+                    'other/*',
+                    'less/*',
+                    "javascript/*",
+                    'css/*',
+                    'html/partials/*',
+                    'html/*'
                 ],
                 tasks: ['concurrent']
             }
         },
         concurrent: {
-            target1: ['less', 'uglify', 'htmlmin'],
+            target1: ['less', 'uglify'],
+            target3: ['autoprefixer', 'htmlmin'],
             target2: ['cssmin'],
-            target3: ['autoprefixer'],
             target4: ['copy', 'clean']
         },
         autoprefixer: {

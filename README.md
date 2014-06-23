@@ -7,7 +7,7 @@ Ghost 0.4.2 compatibility
 
 ## Introduction
 
-A minimal theme, powered by Ghost. Live Demo: (https://silvenga.com)
+A minimal theme, powered by Ghost. Live demo: (https://silvenga.com).
 
 Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyqian.com/) and Roryg’s Ghostwriter theme (https://github.com/roryg/ghostwriter). 
 
@@ -37,7 +37,7 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 * Using jquery.lazyView (https://github.com/Silvenga/jquery-lazyView).
 * Fixes issues with mobile devices (iPhone).
 * Fixed IE11 issues.
-* Fixed web-kit CSS issues.
+* Fixed Webkit CSS issues.
 * Streamlined grunt building.
 * Javascript fixes.
 * Style fixes.

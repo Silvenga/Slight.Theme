@@ -3,37 +3,6 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
-            //            less: {
-            //                files: [
-            //                    'less/*'
-            //                ],
-            //                tasks: ['concurrent']
-            //            },
-            //            js: {
-            //                files: [
-            //                    'javascript/*'
-            //                ],
-            //                tasks: ['concurrent']
-            //            },
-            //            css: {
-            //                files: [
-            //                    'css/*'
-            //                ],
-            //                tasks: ['concurrent']
-            //            },
-            //            html: {
-            //                files: [
-            //                    'html/*',
-            //                    'html/partials/*'
-            //                ],
-            //                tasks: ['concurrent']
-            //            },
-            //            other: {
-            //                files: [
-            //                    'other/*'
-            //                ],
-            //                tasks: ['concurrent']
-            //                        }
             other: {
                 files: [
                     'other/*',
@@ -48,8 +17,8 @@ module.exports = function (grunt) {
         },
         concurrent: {
             target1: ['less', 'uglify'],
-            target3: ['autoprefixer', 'htmlmin'],
-            target2: ['cssmin'],
+            target2: ['autoprefixer', 'htmlmin'],
+            target3: ['cssmin'],
             target4: ['copy', 'clean']
         },
         autoprefixer: {
@@ -59,27 +28,15 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                mangle: false,
+                mangle: true,
                 sourceMap: false,
                 compress: true
             },
-            min: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'javascript/',
-                        src: '*.js',
-                        dest: '<%= theme_name %>/assets/js/'
-                    }
-                ]
-            },
-            combine: {
+            combine_min: {
                 files: {
                     '<%= theme_name %>/assets/js/pack.min.js':
                     [
-                        '<%= theme_name %>/assets/js/blob.min.js',
-                        '<%= theme_name %>/assets/js/ajax.loading.js',
-                        '<%= theme_name %>/assets/js/master.js'
+                        'javascript/blob.*.js'
                     ]
                 }
             }
@@ -132,11 +89,10 @@ module.exports = function (grunt) {
         copy: {
             main: {
                 files: [
-                    // includes files within path
-                    {
-                        src: ['fonts/*'],
-                        dest: '<%= theme_name %>/assets/'
-                    },
+//                    {
+//                        src: ['fonts/*'],
+//                        dest: '<%= theme_name %>/assets/'
+//                    },
                     {
                         src: ['images/*'],
                         dest: '<%= theme_name %>/assets/'
@@ -152,10 +108,12 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            css: ["/css/compiled.css"],
+            css: ["css/compiled.css"],
         },
         'theme_name': "../Slight"
     });
+
+    grunt.registerTask('default', ['concurrent']);
 
     grunt.loadNpmTasks('assemble-less');
     grunt.loadNpmTasks('grunt-contrib-watch');

@@ -412,7 +412,8 @@ div.light-box-wrapper {
     //width: 100%;
     max-width: 100%;
     margin: 0.5em auto;
-    max-height: 15em;
+    max-height: 100%;
+    //height: 15em;
     display: block;
 }
 
@@ -443,6 +444,7 @@ img.light-box {
     //width: 100%;
     margin: auto;
     display: block;
+    //height: 15em;
     transition: all ease-in-out 200ms;
     box-shadow: 0 0 15px 0 rgba(50, 50, 50, 0.75);
 }
@@ -453,6 +455,7 @@ img.light-box:hover {
 
 .selected > img.light-box {
     box-shadow: 0 0 15px 0 rgba(50, 50, 50, 0.75);
+    height: 100%;
     cursor: pointer;
 }
 

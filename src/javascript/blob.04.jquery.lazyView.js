@@ -3,17 +3,18 @@
 (function ($) {
 
     var seenKey = 'handled';
-    var funqueue = [];
+    var funQueue = [];
     var isProcessing = false;
 
-    function seen($element) {
+    function doSeen($element) {
 
         $element.removeClass('invisible');
         $element.addClass('visible');
 
+        // Cleanup
         setTimeout(function () {
             $element.removeClass('visible');
-        }, 310);
+        }, 300);
     }
 
     function isSeen($element) {
@@ -30,16 +31,19 @@
 
         var bonds = $element[0].getBoundingClientRect();
 
-        var bondsTop = $(window).scrollTop() + bonds.top;
-        var bondsLeft = $(window).scrollLeft() + bonds.left;
-        var bondsBottom = $(window).scrollTop() + bonds.bottom;
-        var bondsRight = $(window).scrollLeft() + bonds.right;
+        var windowScrollTop = $(window).scrollTop();
+        var windowScrollLeft = $(window).scrollLeft();
+
+        var bondsTop = windowScrollTop + bonds.top;
+        var bondsLeft = windowScrollLeft + bonds.left;
+        var bondsBottom = windowScrollTop + bonds.bottom;
+        var bondsRight = windowScrollLeft + bonds.right;
 
         var bondsHeight = bondsBottom - bondsTop;
         var bondsWidth = bondsRight - bondsLeft;
 
-        var portTop = $(window).scrollTop() - bondsHeight;
-        var portLeft = $(window).scrollLeft() - bondsWidth;
+        var portTop = windowScrollTop - bondsHeight;
+        var portLeft = windowScrollLeft - bondsWidth;
         var portBottom = portTop + $(window).height() + bondsHeight + bondsHeight;
         var portRight = portLeft + $(window).width() + bondsWidth + bondsWidth;
 
@@ -48,11 +52,11 @@
 
     function doProcess() {
 
-        isProcessing = funqueue.length > 0;
+        isProcessing = funQueue.length > 0;
 
         if (isProcessing) {
 
-            var func = funqueue.shift();
+            var func = funQueue.shift();
             func();
 
             setTimeout(doProcess, 5);
@@ -61,7 +65,7 @@
 
     function addProcess(func) {
 
-        funqueue.push(func);
+        funQueue.push(func);
 
         if (!isProcessing)
             doProcess();
@@ -74,30 +78,28 @@
             var $element = $(this);
 
             if (!isSeen($element)) {
-                $element.addClass('invisible');
 
-//                console.log($element.attr('id') + "::test");
+                $element.addClass('invisible');
 
                 var onChanged = function () {
 
-                    if (!isSeen($element)) {
+                    if (!isSeen($element) && isVisible($element)) {
 
-                        if (isVisible($element)) {
-                            var seenWrapper = function () {
-
-//                                console.log($element.attr('id') + "::in");
-
-                                seen($element);
-                            }
-
-                            setSeen($element);
-                            addProcess(seenWrapper);
+                        var seenWrapper = function () {
+                            doSeen($element);
                         }
+
+                        setSeen($element);
+                        addProcess(seenWrapper);
+
+                        $(window).off("scroll", onChanged);
+                        $(window).off("resize", onChanged);
                     }
                 };
 
-                $(window).scroll(onChanged);
-                $(window).resize(onChanged);
+                $(window).on("scroll", onChanged);
+                $(window).on("resize", onChanged);
+
                 onChanged();
             }
         });

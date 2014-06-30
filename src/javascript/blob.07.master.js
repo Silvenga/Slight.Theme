@@ -106,22 +106,6 @@ jQuery(function ($) {
 
             $('[data-gist-id]').width("auto");
         });
-
-        //    $('.hover-parrent').bind('touchstart', function () {
-        //
-        //        $(this).addClass("onhover");
-        //    });
-
-        //        $(window).scroll(function () {
-        //
-        //            if ($(document).scrollTop() > 50 && false) {
-        //
-        //                $(".sticky-menu").addClass("menu-small");
-        //            } else {
-        //
-        //                $(".sticky-menu").removeClass("menu-small");
-        //            }
-        //        });
     }
 
     function attachDisqus() {

@@ -25,8 +25,8 @@
         {{> sidebar}}
     </header>
     {{> menu}}
-    <div id="ajax-container" class="content wrapper" style="visibility: hidden">
-        <div class="" id="ajax-content">
+    <div id="ajax-container" class="content wrapper">
+        <div class="" id="ajax-content" style="visibility: hidden">
             {{{body}}}
             <div class="hidden" id="title">{{meta_title}}</div>
             <div class="hidden" id="page-length"></div>
@@ -37,10 +37,7 @@
         <div>Copyright &copy; Mark Lopez 2014. <a href="/humble-disclaimer/">My Humble Disclaimer and Privacy Policy</a>.</div>
     </footer>
     {{!ghost_foot}}
-    {{! jQuery}}
-    <script src="/assets/js/jquery.min.js"></script>
-    {{! Pace, Git-Embed, jQuery History}}
-    <script async src="/assets/js/jquery.lazyView.js"></script>
+    {{! jQuery, Pace, Git-Embed, jQuery History, etc.}}
     <script async src="/assets/js/pack.min.js"></script>
 </body>
 </html>

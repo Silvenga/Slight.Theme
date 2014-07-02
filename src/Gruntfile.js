@@ -8,7 +8,6 @@ module.exports = function (grunt) {
                     'other/*',
                     'less/*',
                     "javascript/*",
-                    'css/*',
                     'html/partials/*',
                     'html/*'
                 ],

@@ -3,15 +3,23 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
-            other: {
+            html: {
                 files: [
                     'other/*',
-                    'less/*',
-                    "javascript/*",
                     'html/partials/*',
                     'html/*'
                 ],
-                tasks: ['concurrent']
+                tasks: ['htmlmin', 'copy', 'clean']
+            }, less: {
+                files: [
+                    'less/*'
+                ],
+                tasks: ['less', 'autoprefixer', 'cssmin']
+            }, js: {
+                files: [
+                    "javascript/*"
+                ],
+                tasks: ['uglify']
             }
         },
         concurrent: {
@@ -109,7 +117,7 @@ module.exports = function (grunt) {
         clean: {
             css: ["css/compiled.css"],
         },
-        'theme_name': "../Slight"
+        'theme_name': "../ghost/content/themes/Slight"
     });
 
     grunt.registerTask('default', ['concurrent']);

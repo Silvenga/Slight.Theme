@@ -16,28 +16,34 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 </head>
 <body class="{{body_class}}" style="visibility: hidden">
-    <header id="header">
-        {{#if @blog.logo}}
-        <a id="logo" href="/"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
-        {{/if}}
-        <h1><a href="/">{{@blog.title}}</a></h1>
-        <p>{{@blog.description}}</p>
-        {{> sidebar}}
-    </header>
-    {{> menu}}
-    <div id="ajax-container" class="content wrapper">
-        <div class="" id="ajax-content" style="visibility: hidden">
-            {{{body}}}
-            <div class="hidden" id="title">{{meta_title}}</div>
-            <div class="hidden" id="page-length"></div>
-            <div class="hidden" id="page-id">{{post.id}}</div>
+    <div class="page-container">
+        <header id="header">
+            <div class="header-title">
+                {{#if @blog.logo}}
+                <a id="logo" href="/"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
+                {{/if}}
+                <h1><a href="/">{{@blog.title}}</a></h1>
+                <p>{{@blog.description}}</p>
+            </div>
+            <div class="header-sidebar">
+                {{> sidebar}}
+            </div>
+        </header> 
+        {{> menu}}
+        <div id="ajax-container" class="content wrapper">
+            <div class="" id="ajax-content" style="visibility: hidden">
+                {{{body}}}
+                <div class="hidden" id="title">{{meta_title}}</div>
+                <div class="hidden" id="page-length"></div>
+                <div class="hidden" id="page-id">{{post.id}}</div>
+            </div>
         </div>
+        <footer class="footer" id="main-footer">
+            <div>Copyright &copy; Mark Lopez 2014. <a href="/humble-disclaimer/">My Humble Disclaimer and Privacy Policy</a>.</div>
+        </footer>
     </div>
-    <footer class="footer" id="main-footer">
-        <div>Copyright &copy; Mark Lopez 2014. <a href="/humble-disclaimer/">My Humble Disclaimer and Privacy Policy</a>.</div>
-    </footer>
     {{!ghost_foot}}
     {{! jQuery, Pace, Git-Embed, jQuery History, etc.}}
-    <script async src="/assets/js/pack.min.js"></script>
+    <script async type="text/javascript" src="/assets/js/pack.min.js"></script>
 </body>
 </html>

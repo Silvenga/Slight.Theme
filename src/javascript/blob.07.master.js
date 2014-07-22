@@ -1,6 +1,6 @@
 ﻿//////////////////////////////////////////////////
 
-var disqus_shortname = 'example';
+var disqus_shortname = 'silvenga-blog-ghost';
 
 //////////////////////////////////////////////////
 
@@ -9,27 +9,29 @@ jQuery(function ($) {
     var history = window.History;
     var $ajaxContainer = $('#ajax-container');
 
-    (function () {
+    setTimeout(function () {
+        (function () {
 
-        // Bring everything in nicely
-        $("body").lazyView();
+            // Bring everything in nicely
+            $("body").lazyView();
 
-        // See if we can enable Ajax'ed requests
-        enableAjax();
+            // See if we can enable Ajax'ed requests
+            enableAjax();
 
-        // Load the javascript for every page
-        onLoaded();
+            // Load the javascript for every page
+            onLoaded();
 
-        // Prevent flashing when scroll bars apear/hide
-        $(window).on("resize", sizeForScroll);
+            // Prevent flashing when scroll bars apear/hide 
+            $(window).on("resize", sizeForScroll);
 
-        // Run the scripts after ajax (ajax looses scripts)
-        $(document).on("ajax.completed", onLoaded);
+            // Run the scripts after ajax (ajax looses scripts)
+            $(document).on("ajax.completed", onLoaded);
 
-    }());
+        }()); 
+    }, 0);
 
     function enableAjax() {
-
+         
         // Got Ajax?
         if (!history.enabled) {
             console.log("Ajax not supported. :(");
@@ -39,7 +41,7 @@ jQuery(function ($) {
         // Progress bar for Ajax
         Pace.start();
         Pace.restart();
-
+         
         // Make any link Ajax'ible
         $('body').on('click', 'a', doAjaxLink);
 
@@ -190,7 +192,7 @@ jQuery(function ($) {
     function doAjaxLink(e) {
 
         // Figure out if link can ajax
-        if (isExternal($(this).attr('href')) || $(this).hasClass('light-box'))
+        if (isExternal($(this).attr('href')) || $(this).hasClass('light-box') || $(this).hasClass('disable-ajax'))
             return true;
 
         // The link is ajaxible, disable normal action
@@ -226,9 +228,9 @@ jQuery(function ($) {
 
     function sizeForScroll() {
 
-        var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
-        $('body').width(bodyWidth);
-
+//        var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
+//        $('body').width(bodyWidth);
+//
         $("#nav-bar").width($("#ajax-container").width());
     }
 

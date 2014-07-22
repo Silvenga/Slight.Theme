@@ -183,13 +183,16 @@ nav.nav-bar {
 }
 
 .post-date {
-    transition-property: color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-    color: fade(@link, 0);
-    font-size: 0px;
+    //transition-property: color;
+    //  transition-duration: 200ms;
+    //  transition-timing-function: ease-out;
+    //  color: fade(@link, 0);
+    //  font-size: 0px;
     width: 0;
     overflow: hidden;
+    color: @link;
+    width: 7em;
+    font-size: 0.9em;
 }
 
 .all-posts.onhover > section > .post > .post-date {
@@ -295,10 +298,6 @@ code {
         color: @link;
         width: 0em;
         font-size: 0em;
-    }
-
-    h1{
-        font-size: 0.6em;
     }
 }
 

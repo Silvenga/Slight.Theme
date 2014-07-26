@@ -1,5 +1,6 @@
 ﻿//////////////////////////////////////////////////
 
+var enable_disques = false;
 var disqus_shortname = 'silvenga-blog-ghost';
 
 //////////////////////////////////////////////////
@@ -13,7 +14,11 @@ jQuery(function ($) {
         (function () {
 
             // Bring everything in nicely
-            $("body").lazyView();
+            //$(".fade").lazyView();
+            var color = genColor("" + document.title);
+
+            $ajaxContainer.find(".nav-banner").css('background-color', color);
+            $ajaxContainer.find(".banner").css('background-color', color);
 
             // See if we can enable Ajax'ed requests
             enableAjax();
@@ -27,11 +32,11 @@ jQuery(function ($) {
             // Run the scripts after ajax (ajax looses scripts)
             $(document).on("ajax.completed", onLoaded);
 
-        }()); 
+        }());
     }, 0);
 
     function enableAjax() {
-         
+
         // Got Ajax?
         if (!history.enabled) {
             console.log("Ajax not supported. :(");
@@ -41,7 +46,7 @@ jQuery(function ($) {
         // Progress bar for Ajax
         Pace.start();
         Pace.restart();
-         
+
         // Make any link Ajax'ible
         $('body').on('click', 'a', doAjaxLink);
 
@@ -68,7 +73,7 @@ jQuery(function ($) {
         });
 
         attempt(function () {
-            $("#ajax-content").lazyView();
+            //  $(".fade").lazyView();
         });
 
         attempt(function () {
@@ -99,11 +104,6 @@ jQuery(function ($) {
             $(this).removeClass("onhover");
         });
 
-        $('[data-gist-id]').on("mouseenter", function () {
-
-            $('[data-gist-id]').width($('#ajax-content').width());
-        });
-
         $('[data-gist-id]').on("mouseleave", function () {
 
             $('[data-gist-id]').width("auto");
@@ -112,32 +112,34 @@ jQuery(function ($) {
 
     function attachDisqus() {
 
-        // Have we already loaded Disqus?
-        if ($("#disqus_script").length > 0) {
+        if (enable_disques) {
+            // Have we already loaded Disqus?
+            if ($("#disqus_script").length > 0) {
 
-            // if id is seen, then run the comments reset script
+                // if id is seen, then run the comments reset script
 
-            DISQUS.reset({
-                reload: true,
-                config: function () {
-                    this.page.identifier = $("#page-id").text();
-                    this.page.url = history.getState().url;
-                }
-            });
+                DISQUS.reset({
+                    reload: true,
+                    config: function () {
+                        this.page.identifier = $("#page-id").text();
+                        this.page.url = history.getState().url;
+                    }
+                });
 
-        } else if ($("#disqus_thread").length > 0 && $("#disqus_script").length == 0) {
+            } else if ($("#disqus_thread").length > 0 && $("#disqus_script").length == 0) {
 
-            // We have no Disqus scripts loaded, lets fix that
+                // We have no Disqus scripts loaded, lets fix that
 
-            var disqus_identifier = $("#page-id").text();
-            (function () {
-                var dsq = document.createElement('script');
-                dsq.id = "disqus_script";
-                dsq.type = 'text/javascript';
-                dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
+                var disqus_identifier = $("#page-id").text();
+                (function () {
+                    var dsq = document.createElement('script');
+                    dsq.id = "disqus_script";
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
         }
     }
 
@@ -145,48 +147,69 @@ jQuery(function ($) {
 
         var state = history.getState();
 
+        $(".main-container").addClass("going-container").removeClass("main-container");
+
         // Move user to top of page (mainly for phone users)
         $('html, body').animate({ 'scrollTop': 0 });
 
         // Fade out to ajax
         $("#main-footer").fadeOut(100);
-        $ajaxContainer.fadeOut(100);
 
-        $('#ajax-container').load(state.url + ' #ajax-content', function (response, status, xhr) {
 
-            // Anything happened?
-            if (status != "success" && status != "notmodified") {
 
-                //                var msg = $('<div>', { html: response });
-                //                msg = msg.find('#ajax-content').html();
-                //
-                //                $("#ajax-container").html(msg);
-
-                // Bad happened
-                $("#ajax-container").html("<br>Error? " + status);
-            }
-
-            // We are removing title info, get it before its gone.
-            document.title = $("#title").text();
-
-            // Unhide
-            $ajaxContainer.fadeIn(0);
-            $("#main-footer").fadeIn(0, function () {
-                Pace.stop();
-            });
-
-            // Move to top
-            $('html, body').animate({
-                scrollTop: $("#ajax-content").offset().top - 90
-            }, 400);
-
-            // Tell everyone of the new page
-            $.event.trigger({
-                type: "ajax.completed",
-                title: $("#title").text(),
-                url: state.url
-            });
+        var $tempDiv = $("<div/>", {
+            id: $ajaxContainer.id
         });
+
+        setTimeout(function () {
+            $tempDiv.load(state.url + ' #ajax-content', function (response, status, xhr) {
+
+                var oldColor = $ajaxContainer.find(".nav-banner").css('background-color');
+
+                $tempDiv.find(".nav-banner").css('background-color', "transparent");
+                $tempDiv.find(".banner").css('background-color', oldColor);
+
+                // Anything happened?
+                if (status != "success" && status != "notmodified") {
+
+                    //                var msg = $('<div>', { html: response });
+                    //                msg = msg.find('#ajax-content').html();
+                    //
+                    //                $("#ajax-container").html(msg);
+
+                    // Bad happened
+                    $ajaxContainer.html("<br>Error? " + status);
+                }
+
+                // We are removing title info, get it before its gone.
+                document.title = $tempDiv.find("#title").text();
+
+                // Unhide
+                //$ajaxContainer.fadeIn(100);
+                $("#main-footer").fadeIn(0, function () {
+                    Pace.stop();
+                });
+
+                $ajaxContainer.html($tempDiv);
+
+                // Move to top
+                $('html, body').animate({
+                    scrollTop: $("#ajax-content").offset().top
+                }, 400);
+
+                // Tell everyone of the new page
+                $.event.trigger({
+                    type: "ajax.completed",
+                    title: $("#title").text(),
+                    url: state.url
+                });
+
+                var color = genColor("" + document.title);
+
+                $ajaxContainer.find(".nav-banner").css('background-color', color);
+                $ajaxContainer.find(".banner").css('background-color', color);
+            });
+        }, 600);
     }
 
     function doAjaxLink(e) {
@@ -228,10 +251,10 @@ jQuery(function ($) {
 
     function sizeForScroll() {
 
-//        var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
-//        $('body').width(bodyWidth);
-//
-        $("#nav-bar").width($("#ajax-container").width());
+        var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
+        $('body').width(bodyWidth);
+
+        // $("#nav-bar").width($("#page-width").width());
     }
 
     function hasScrollBar() {
@@ -264,4 +287,36 @@ jQuery(function ($) {
             return true;
         return false;
     }
+
+    function genHash(text, mod) {
+
+        var hash = 0;
+
+        for (var i = 0; i < text.length; i++) {
+
+            hash += text.charCodeAt(i);
+        }
+
+        hash *= 7;
+
+        var simpleHash = hash % mod;
+
+        console.log("Hash: " + hash + " " + simpleHash);
+
+        return simpleHash;
+    }
+
+    function genColor(text) {
+
+        var i = genHash(text, colors.length);
+
+        return "#" + colors[i];
+    }
+
+    var colors = [
+        "e51c23", "9c27b0", "673ab7",
+        "3f51b5", "5677fc", "03a9f4",
+        "009688", "795548", "259b24",
+        "8bc34a", "ffc107", "ff5722",
+        "607d8b", "9e9e9e", "00bcd4"];
 });

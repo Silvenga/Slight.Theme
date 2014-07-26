@@ -36,7 +36,7 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 mangle: true,
-                sourceMap: false,
+                sourceMap: true,
                 compress: true
             },
             combine_min: {

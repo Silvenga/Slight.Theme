@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {{! Document Settings }}
+    <title>{{meta_title}}</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    {{! Page Meta }}
-    <title>{{meta_title}}</title>
     <meta name="description" content="{{meta_description}}" />
-    {{! Responsive Meta Tags }}
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {{! Ghost head}}
     {{ghost_head}}
-    {{! Styles }}
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 </head>
-<body class="{{body_class}}" style="visibility: hidden">
-    <div class="page-container">
-        <header id="header">
-            <div class="header-title">
-                {{#if @blog.logo}}
-                <a id="logo" href="/"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
-                {{/if}}
-                <h1><a href="/">{{@blog.title}}</a></h1>
-                <p>{{@blog.description}}</p>
-            </div>
-            <div class="header-sidebar">
+<body class="{{body_class}}">
+    <header class="header">
+        <div class="fade">
+            {{#if @blog.logo}}
+            <a href="/">
+                <img src="{{@blog.logo}}" alt="{{@blog.title}}" />
+            </a>
+            {{/if}}
+
+            <h1>
+                <a href="/">
+                    {{@blog.title}}
+                </a>
+            </h1>
+
+            <p>{{@blog.description}}</p>
+
+            <div>
                 {{> sidebar}}
             </div>
-        </header> 
-        {{> menu}}
-        <div id="ajax-container" class="content wrapper">
-            <div class="" id="ajax-content" style="visibility: hidden">
-                {{{body}}}
-                <div class="hidden" id="title">{{meta_title}}</div>
-                <div class="hidden" id="page-length"></div>
-                <div class="hidden" id="page-id">{{post.id}}</div>
-            </div>
         </div>
-        <footer class="footer" id="main-footer">
-            <div>Copyright &copy; Mark Lopez 2014. <a href="/humble-disclaimer/">My Humble Disclaimer and Privacy Policy</a>.</div>
-        </footer>
+    </header>
+    <div id="ajax-container">
+        <div id="ajax-content">
+            <main class="content">
+                {{{body}}}
+                <div class="hidden full-width">
+                    <div id="title">{{meta_title}}</div>
+                    <div id="page-id">{{post.id}}</div>
+                    <div id="page-width"></div>
+                </div>
+            </main>
+        </div>
     </div>
+    <footer class="footer" id="main-footer">
+        <div class="footer-container">
+            Copyright &copy; Mark Lopez 2014. <a href="/humble-disclaimer/">My Humble Disclaimer and Privacy Policy</a>.
+        </div>
+    </footer>
     {{!ghost_foot}}
     {{! jQuery, Pace, Git-Embed, jQuery History, etc.}}
     <script async type="text/javascript" src="/assets/js/pack.min.js"></script>

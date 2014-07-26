@@ -1,17 +1,26 @@
-<main class="main" role="main">
-    {{#post}}
-    <article class="article">
-        <div class="postheader">
-            <div class="date">{{date format='dddd MMMM DD, YYYY'}}: </div>
-            <h1 class="posttitle">{{title}} </h1>
+{{#post}}
+<article class="article">
+    {{> menu}}
+    <div class="banner"></div>
+    <div class="main-container">
+        <div class="article-header">
+            <h1 class="article-title">
+                {{title}}
+            </h1>
+            <div class="article-date">
+                {{date format='MMMM DD, YYYY'}}
+            </div>
         </div>
-        <div class="postcontent">
-            {{content}}
+        <div class="article-container">
+            <div class="article-content ">
+                {{content}}
+            </div>
+            <div class="article-comments">
+                <div id="disqus_thread"></div>
+            </div>
         </div>
-        <div id="comments" class="postcontent">
-            <div id="disqus_thread"></div>
-        </div>
-    </article>
+    </div>
+</article>
     {{/post}}
-</main>
+
 <!--{{!< default}}-->

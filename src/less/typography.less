@@ -1,6 +1,3 @@
-/**
-// Mixins
-**/
 
 .HeaderFont () {
     font-family: @header_font;
@@ -10,33 +7,25 @@
 /**
 // Styles
 **/
- 
-body {
 
+body {
     margin: 0;
-    font-family: @default_font; 
+    font-family: @default_font;
     line-height: @golden + .1em;
 }
 
-a { 
+a {
     text-decoration: none;
     background: transparent;
-}
 
-    a:link, a:visited {
-    }
-
-    a:focus {
+    &:focus {
         outline: thin dotted;
     }
 
-    a:active,
-    a:hover {
+    &:active,
+    &:hover {
         outline: 0;
     }
-
-.postcontent {
-    text-align: left;
 }
 
 h1 {
@@ -82,6 +71,9 @@ code, pre {
 }
 
 .gist {
-
     font-size: 0.9em;
+}
+
+.full-width {
+    width: 100%;
 }

@@ -1,17 +1,24 @@
-<main class="hover-parrent all-posts accordion vertical">
-    {{#foreach posts}}
-    <section class="hover-parrent sliders">
-        <div class="post parent-table">
-            <h3 class="left-cell">
-                <a href="{{{url}}}">{{title}}</a>
-            </h3>
-            <h3 class="right-cell text-righted post-date">{{date format='MMM D, YYYY'}}</h3>
+<main class="index">
+    {{> menu}}
+    <div class="banner"></div>
+    <div class=" main-container">
+        <div class="index-container">
+            {{#foreach posts}}
+            <section class="hover-parrent sliders ">
+                <div class="post parent-table index-element">
+                    <h3 class="left-cell">
+                        <a href="{{{url}}}">
+                            {{title}}
+                        </a>
+                    </h3>
+                    <h3 class="right-cell righted index-date">
+                        {{date format='MMM D, YYYY'}}
+                    </h3>
+                </div>
+            </section>
+            {{/foreach}}
         </div>
-        <div class="post-excerpt">
-            {{excerpt characters="300"}}...
-        </div>
-    </section>
-    {{/foreach}}
+    </div>
 </main>
     {{!pagination}}
 <!--{{!< default}}-->

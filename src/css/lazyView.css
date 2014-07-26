@@ -4,12 +4,15 @@
     border: 0 solid white;
 }
 
+.fade-1 {
+    visibility: hidden;
+}
+
 .visible {
     -webkit-transition: opacity 0.3s cubic-bezier(0.000, 0.950, 1.000, 0.955);
     transition: opacity 0.3s cubic-bezier(0.000, 0.950, 1.000, 0.955);
     -webkit-animation: flyin 0.3s ease forwards;
     animation: flyin 0.3s ease forwards;
-
 }
 
 
@@ -24,7 +27,7 @@
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
     }
-} 
+}
 
 
 
@@ -39,4 +42,3 @@
         transform: translate(0, 0);
     }
 }
- 

@@ -1,6 +1,6 @@
 ﻿//////////////////////////////////////////////////
 
-var enable_disques = false;
+var enable_disques = true;
 var disqus_shortname = 'silvenga-blog-ghost';
 
 //////////////////////////////////////////////////
@@ -75,10 +75,6 @@ jQuery(function ($) {
         attempt(function () {
             //  $(".fade").lazyView();
         });
-
-        attempt(function () {
-            attachLightBox();
-        });
     }
 
     function attempt(func) {
@@ -102,11 +98,6 @@ jQuery(function ($) {
         $(".hover-parrent").on("mouseleave", function () {
 
             $(this).removeClass("onhover");
-        });
-
-        $('[data-gist-id]').on("mouseleave", function () {
-
-            $('[data-gist-id]').width("auto");
         });
     }
 
@@ -155,8 +146,6 @@ jQuery(function ($) {
         // Fade out to ajax
         $("#main-footer").fadeOut(100);
 
-
-
         var $tempDiv = $("<div/>", {
             id: $ajaxContainer.id
         });
@@ -172,24 +161,16 @@ jQuery(function ($) {
                 // Anything happened?
                 if (status != "success" && status != "notmodified") {
 
-                    //                var msg = $('<div>', { html: response });
-                    //                msg = msg.find('#ajax-content').html();
-                    //
-                    //                $("#ajax-container").html(msg);
-
                     // Bad happened
                     $ajaxContainer.html("<br>Error? " + status);
+                    $(".going-container").addClass("main-container").removeClass("going-container");
                 }
 
                 // We are removing title info, get it before its gone.
                 document.title = $tempDiv.find("#title").text();
 
                 // Unhide
-                //$ajaxContainer.fadeIn(100);
-                $("#main-footer").fadeIn(0, function () {
-                    Pace.stop();
-                });
-
+                $("#main-footer").fadeIn(100);
                 $ajaxContainer.html($tempDiv);
 
                 // Move to top
@@ -208,8 +189,10 @@ jQuery(function ($) {
 
                 $ajaxContainer.find(".nav-banner").css('background-color', color);
                 $ajaxContainer.find(".banner").css('background-color', color);
+
+                Pace.stop();
             });
-        }, 600);
+        }, 400);
     }
 
     function doAjaxLink(e) {
@@ -232,29 +215,10 @@ jQuery(function ($) {
         }
     }
 
-    function attachLightBox() {
-
-        $("img", ".postcontent").wrap(function () {
-            return "<div class='light-box-wrapper'></div>";
-        });
-
-        $("img", ".postcontent").addClass("light-box");
-
-        $(".light-box-wrapper").click("click", function () {
-
-            if ($(this).hasClass("selected"))
-                $(this).removeClass("selected");
-            else
-                $(this).addClass("selected");
-        });
-    }
-
     function sizeForScroll() {
 
         var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
         $('body').width(bodyWidth);
-
-        // $("#nav-bar").width($("#page-width").width());
     }
 
     function hasScrollBar() {

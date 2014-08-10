@@ -13,13 +13,6 @@ jQuery(function ($) {
     setTimeout(function () {
         (function () {
 
-            // Bring everything in nicely
-            //$(".fade").lazyView();
-            var color = genColor("" + document.title);
-
-            $ajaxContainer.find(".nav-banner").css('background-color', color);
-            $ajaxContainer.find(".banner").css('background-color', color);
-
             // See if we can enable Ajax'ed requests
             enableAjax();
 
@@ -71,10 +64,6 @@ jQuery(function ($) {
         attempt(function () {
             $('[data-gist-id]').gist();
         });
-
-        attempt(function () {
-            //  $(".fade").lazyView();
-        });
     }
 
     function attempt(func) {
@@ -108,7 +97,6 @@ jQuery(function ($) {
             if ($("#disqus_script").length > 0) {
 
                 // if id is seen, then run the comments reset script
-
                 DISQUS.reset({
                     reload: true,
                     config: function () {
@@ -120,7 +108,6 @@ jQuery(function ($) {
             } else if ($("#disqus_thread").length > 0 && $("#disqus_script").length == 0) {
 
                 // We have no Disqus scripts loaded, lets fix that
-
                 var disqus_identifier = $("#page-id").text();
                 (function () {
                     var dsq = document.createElement('script');
@@ -153,11 +140,6 @@ jQuery(function ($) {
         setTimeout(function () {
             $tempDiv.load(state.url + ' #ajax-content', function (response, status, xhr) {
 
-                var oldColor = $ajaxContainer.find(".nav-banner").css('background-color');
-
-                $tempDiv.find(".nav-banner").css('background-color', "transparent");
-                $tempDiv.find(".banner").css('background-color', oldColor);
-
                 // Anything happened?
                 if (status != "success" && status != "notmodified") {
 
@@ -184,11 +166,6 @@ jQuery(function ($) {
                     title: $("#title").text(),
                     url: state.url
                 });
-
-                var color = genColor("" + document.title);
-
-                $ajaxContainer.find(".nav-banner").css('background-color', color);
-                $ajaxContainer.find(".banner").css('background-color', color);
 
                 Pace.stop();
             });
@@ -251,36 +228,4 @@ jQuery(function ($) {
             return true;
         return false;
     }
-
-    function genHash(text, mod) {
-
-        var hash = 0;
-
-        for (var i = 0; i < text.length; i++) {
-
-            hash += text.charCodeAt(i);
-        }
-
-        hash *= 7;
-
-        var simpleHash = hash % mod;
-
-        console.log("Hash: " + hash + " " + simpleHash);
-
-        return simpleHash;
-    }
-
-    function genColor(text) {
-
-        var i = genHash(text, colors.length);
-
-        return "#" + colors[i];
-    }
-
-    var colors = [
-        "e51c23", "9c27b0", "673ab7",
-        "3f51b5", "5677fc", "03a9f4",
-        "009688", "795548", "259b24",
-        "8bc34a", "ffc107", "ff5722",
-        "607d8b", "9e9e9e", "00bcd4"];
 });

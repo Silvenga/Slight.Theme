@@ -64,6 +64,11 @@ jQuery(function ($) {
         attempt(function () {
             $('[data-gist-id]').gist();
         });
+
+        attempt(function () {
+            $('p img').parent().addClass("image-p");
+            $('p code[data-gist-id]').parent().addClass("image-p");
+        });
     }
 
     function attempt(func) {

@@ -142,39 +142,53 @@ jQuery(function ($) {
             id: $ajaxContainer.id
         });
 
+        var animation = $.Deferred();
+
+        var ajax = $tempDiv.load(state.url + ' #ajax-content', function (response, status) {
+
+            // Anything happened?
+            if (status != "success" && status != "notmodified") {
+
+                // Bad happened
+                $tempDiv.html("<br>Error? " + status);
+                $(".going-container").addClass("main-container").removeClass("going-container");
+            }
+
+            // We are removing title info, get it before its gone.
+            document.title = $tempDiv.find("#title").text();
+
+            Pace.stop();
+        });
+
+        $(".main-container").addClass("going-container").removeClass("main-container");
+
         setTimeout(function () {
-            $tempDiv.load(state.url + ' #ajax-content', function (response, status, xhr) {
-
-                // Anything happened?
-                if (status != "success" && status != "notmodified") {
-
-                    // Bad happened
-                    $ajaxContainer.html("<br>Error? " + status);
-                    $(".going-container").addClass("main-container").removeClass("going-container");
-                }
-
-                // We are removing title info, get it before its gone.
-                document.title = $tempDiv.find("#title").text();
-
-                // Unhide
-                $("#main-footer").fadeIn(100);
-                $ajaxContainer.html($tempDiv);
-
-                // Move to top
-                $('html, body').animate({
-                    scrollTop: $("#ajax-content").offset().top
-                }, 400);
-
-                // Tell everyone of the new page
-                $.event.trigger({
-                    type: "ajax.completed",
-                    title: $("#title").text(),
-                    url: state.url
-                });
-
-                Pace.stop();
-            });
+            animation.resolve();
         }, 400);
+
+
+        $.when(animation, ajax).then(function () {
+
+            // $(".main-container").addClass("going-container").removeClass("main-container");
+
+            // setTimeout(function () {
+            // Unhide
+            $("#main-footer").fadeIn(100);
+            $ajaxContainer.html($tempDiv);
+
+            // Move to top
+            $('html, body').animate({
+                scrollTop: $("#ajax-content").offset().top
+            }, 400);
+
+            // Tell everyone of the new page
+            $.event.trigger({
+                type: "ajax.completed",
+                title: $("#title").text(),
+                url: state.url
+            });
+            // }, 400);
+        });
     }
 
     function doAjaxLink(e) {

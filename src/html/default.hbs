@@ -7,7 +7,8 @@
     <meta name="description" content="{{meta_description}}" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {{ghost_head}}
+    <meta name="generator" content="Ghost 0.4" />
+    <link rel="alternate" type="application/rss+xml" title="{{@blog.title}}" href="/rss/">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 </head>
 <body class="{{body_class}}">
@@ -18,7 +19,6 @@
             {{/if}}
             <h1><a href="/">{{@blog.title}}</a></h1>
             <p>{{@blog.description}}</p>
-            <div>{{> sidebar}}</div>
         </div>
     </header>
     <div id="ajax-container">
@@ -43,7 +43,6 @@
             </div>
         </div>
     </footer>
-    {{!ghost_foot}}
     <script async type="text/javascript" src="/assets/js/pack.min.js"></script>
 </body>
 </html>

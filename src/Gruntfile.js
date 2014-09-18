@@ -10,12 +10,14 @@ module.exports = function (grunt) {
                     'html/*'
                 ],
                 tasks: ['htmlmin', 'copy', 'clean']
-            }, less: {
+            },
+            less: {
                 files: [
                     'less/*'
                 ],
                 tasks: ['less', 'autoprefixer', 'cssmin']
-            }, js: {
+            },
+            js: {
                 files: [
                     "javascript/*"
                 ],
@@ -63,6 +65,9 @@ module.exports = function (grunt) {
         },
         cssmin: {
             combine: {
+                options: {
+                    noAggressiveMerging: true
+                },
                 files: {
                     '<%= theme_name %>/assets/css/style.css': ['css/*.css']
                 }
@@ -74,10 +79,13 @@ module.exports = function (grunt) {
                     removeComments: true,
                     collapseWhitespace: true,
                     collapseBooleanAttributes: true,
-                    removeAttributeQuotes: false,
+                    removeAttributeQuotes: true,
+                    removeRedundantAttributes: true,
+                    removeEmptyAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
                     useShortDoctype: true,
                     removeOptionalTags: true,
-                    removeEmptyAttributes: true,
                     keepClosingSlash: false,
                     minifyJS: true,
                     ignoreCustomComments: [/({{!< default}})/i]

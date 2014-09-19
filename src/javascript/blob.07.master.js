@@ -20,7 +20,7 @@ jQuery(function ($) {
             onLoaded();
 
             // Prevent flashing when scroll bars apear/hide 
-            $(window).on("resize", sizeForScroll);
+            //$(window).on("resize", sizeForScroll);
 
             // Run the scripts after ajax (ajax looses scripts)
             $(document).on("ajax.completed", onLoaded);
@@ -53,9 +53,9 @@ jQuery(function ($) {
             attachEvents();
         });
 
-        attempt(function () {
-            sizeForScroll();
-        });
+        //attempt(function () {
+        //    sizeForScroll();
+        //});
 
         attempt(function () {
             attachDisqus();
@@ -99,29 +99,28 @@ jQuery(function ($) {
 
         if (enable_disques) {
             // Have we already loaded Disqus?
-            if ($("#disqus_script").length > 0) {
 
-                // if id is seen, then run the comments reset script
-                DISQUS.reset({
-                    reload: true,
-                    config: function () {
-                        this.page.identifier = $("#page-id").text();
-                        this.page.url = history.getState().url;
-                    }
-                });
+            if ($("#disqus_thread").length > 0) {
 
-            } else if ($("#disqus_thread").length > 0 && $("#disqus_script").length == 0) {
+                if ($("#disqus_script").length > 0) {
 
-                // We have no Disqus scripts loaded, lets fix that
-                var disqus_identifier = $("#page-id").text();
-                (function () {
+                    // if id is seen, then run the comments reset script
+                    DISQUS.reset({
+                        reload: true,
+                        config: function () {
+                            this.page.identifier = $("#page-id").text();
+                            this.page.url = history.getState().url;
+                        }
+                    });
+
+                } else {
+
                     var dsq = document.createElement('script');
                     dsq.id = "disqus_script";
-                    dsq.type = 'text/javascript';
                     dsq.async = true;
                     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
+                    document.getElementsByTagName('head')[0].appendChild(dsq);
+                }
             }
         }
     }
@@ -211,28 +210,28 @@ jQuery(function ($) {
         }
     }
 
-    function sizeForScroll() {
+    //function sizeForScroll() {
 
-        var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
-        $('body').width(bodyWidth);
-    }
+    //    var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
+    //    $('body').width(bodyWidth);
+    //}
 
-    function hasScrollBar() {
+    //function hasScrollBar() {
 
-        return $("body")[0].scrollHeight > $("body")[0].clientHeight;
-    }
+    //    return $("body")[0].scrollHeight > $("body")[0].clientHeight;
+    //} 
 
-    function getScrollBarWidth() {
+    //function getScrollBarWidth() {
 
-        var scrollTester = document.createElement("div");
-        scrollTester.className = "scrollbar-measure";
-        document.body.appendChild(scrollTester);
+    //    var scrollTester = document.createElement("div");
+    //    scrollTester.className = "scrollbar-measure";
+    //    document.body.appendChild(scrollTester);
 
-        var scrollBarWidth = scrollTester.offsetWidth - scrollTester.clientWidth;
-        document.body.removeChild(scrollTester);
+    //    var scrollBarWidth = scrollTester.offsetWidth - scrollTester.clientWidth;
+    //    document.body.removeChild(scrollTester);
 
-        return scrollBarWidth;
-    }
+    //    return scrollBarWidth;
+    //}
 
     function isExternal(url) {
 

@@ -39,7 +39,9 @@ module.exports = function (grunt) {
             options: {
                 mangle: true,
                 sourceMap: true,
-                compress: true
+                compress: true,
+                preserveComments: false,
+
             },
             combine_min: {
                 files: {
@@ -79,7 +81,7 @@ module.exports = function (grunt) {
                     removeComments: true,
                     collapseWhitespace: true,
                     collapseBooleanAttributes: true,
-                    removeAttributeQuotes: true,
+                    removeAttributeQuotes: false, // issues with tags out of order
                     removeRedundantAttributes: true,
                     removeEmptyAttributes: true,
                     removeScriptTypeAttributes: true,

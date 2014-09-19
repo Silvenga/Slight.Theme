@@ -1,4 +1,4 @@
-// PACE 0.5.3
+/*! pace 0.5.6 */
 
 (function () {
     var AjaxMonitor, Bar, DocumentMonitor, ElementMonitor, ElementTracker, EventLagMonitor, Evented, Events, NoTargetError, RequestIntercept, SOURCE_KEYS, Scaler, SocketRequestTracker, XHRRequestTracker, animation, avgAmplitude, bar, cancelAnimation, cancelAnimationFrame, defaultOptions, extend, extendNative, getFromDOM, getIntercept, handlePushState, ignoreStack, init, now, options, requestAnimationFrame, result, runAnimation, scalers, shouldIgnoreURL, shouldTrack, source, sources, uniScaler, _WebSocket, _XDomainRequest, _XMLHttpRequest, _i, _intercept, _len, _pushState, _ref, _ref1, _replaceState,
@@ -428,7 +428,9 @@
                 monitorXHR(req);
                 return req;
             };
-            extendNative(window.XMLHttpRequest, _XMLHttpRequest);
+            try {
+                extendNative(window.XMLHttpRequest, _XMLHttpRequest);
+            } catch (_error) { }
             if (_XDomainRequest != null) {
                 window.XDomainRequest = function () {
                     var req;
@@ -436,7 +438,9 @@
                     monitorXHR(req);
                     return req;
                 };
-                extendNative(window.XDomainRequest, _XDomainRequest);
+                try {
+                    extendNative(window.XDomainRequest, _XDomainRequest);
+                } catch (_error) { }
             }
             if ((_WebSocket != null) && options.ajax.trackWebSockets) {
                 window.WebSocket = function (url, protocols) {
@@ -456,7 +460,9 @@
                     }
                     return req;
                 };
-                extendNative(window.WebSocket, _WebSocket);
+                try {
+                    extendNative(window.WebSocket, _WebSocket);
+                } catch (_error) { }
             }
         }
 

@@ -21,7 +21,7 @@ a {
     &:focus {
         outline: thin dotted;
     }
-     
+
     &:active,
     &:hover {
         outline: 0;
@@ -67,17 +67,20 @@ h6 {
 code, pre {
     border-radius: 2px;
     padding: 5px 3px;
-    background: #f1f0ea;
-    /*transition: background-color ease-in-out 200ms;
 
-    &:hover {
+    &:not([data-gist-id]) {
         background: #f1f0ea;
-    }*/
+    }
 }
 
-.gist {
-    font-size: 0.9em;
+.gist .file-data {
+    font-size: 15px !important;
+    line-height: 1.4 !important;
 }
+
+/*.gist {
+    font-size: 0.9em;
+}*/
 
 .full-width {
     width: 100%;

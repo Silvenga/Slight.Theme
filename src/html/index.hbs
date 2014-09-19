@@ -2,21 +2,21 @@
     <div class=" main-container">
         <div class="index-container">
             {{#foreach posts}}
-            <section class="hover-parrent sliders">
-                <div class="post parent-table index-element">
-                    <h4 class="left-cell">
-                        <a href="{{{url}}}">
+            <a href="{{{url}}}">
+                <section class="hover-parrent sliders">
+                    <div class="post parent-table index-element">
+                        <h4 class="left-cell">
                             {{title}}
-                        </a>
-                    </h4>
-                    <h4 class="right-cell righted index-date">
-                        {{date format='MMM D, YYYY'}}
-                    </h4>
-                </div>
-            </section>
+                        </h4>
+                        <h4 class="right-cell righted index-date">
+                            {{date format='MMM D, YYYY'}}
+                        </h4>
+                    </div>
+                </section>
+            </a>
             {{/foreach}}
         </div>
     </div>
 </main>
     {{!pagination}}
-<!--{{!< default}}-->
+ <!--{{!< default}}-->

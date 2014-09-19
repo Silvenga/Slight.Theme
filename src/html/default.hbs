@@ -27,6 +27,10 @@
                 {{> menu}}
                 {{{body}}}
                 <div class="hidden full-width">
+                    <script>
+                        // Use for the first page load, afterwards everything can be handled in js.
+                        var disqus_identifier = '{{post.id}}';
+                    </script>
                     <div id="title">{{meta_title}}</div>
                     <div id="page-id">{{post.id}}</div>
                     <div id="page-width"></div>

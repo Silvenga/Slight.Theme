@@ -127,7 +127,8 @@ module.exports = function (grunt) {
         clean: {
             css: ["css/compiled.css"],
         },
-        'theme_name': "../ghost/content/themes/Slight"
+        //'theme_name': "../ghost/content/themes/Slight"
+        'theme_name': "../Slight"
     });
 
     grunt.registerTask('default', ['concurrent']);

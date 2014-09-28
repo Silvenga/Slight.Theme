@@ -62,13 +62,36 @@ jQuery(function ($) {
         });
 
         attempt(function () {
+            lightBox();
+        });
+
+        attempt(function () {
             $('[data-gist-id]').gist();
         });
 
         attempt(function () {
-            $('p img').parent().addClass("image-p");
             $('p code[data-gist-id]').parent().addClass("image-p");
         });
+    }
+
+    function lightBox() {
+
+        $('p img').parent().addClass("image-p");
+
+        $("p img").each(function () {
+
+            var $image = $(this);
+
+            var $wrapper = $("<a/>", {
+                "href": $image.attr("src"),
+                "class": "light-box"
+            });
+
+            $image.wrap($wrapper);
+
+        });
+
+        $('a').fluidbox();
     }
 
     function attempt(func) {
@@ -193,7 +216,7 @@ jQuery(function ($) {
     function doAjaxLink(e) {
 
         // Figure out if link can ajax
-        if (isExternal($(this).attr('href')) || $(this).hasClass('light-box') || $(this).hasClass('disable-ajax'))
+        if ($(this).hasClass('light-box') || isExternal($(this).attr('href')) || $(this).hasClass('disable-ajax'))
             return true;
 
         // The link is ajaxible, disable normal action

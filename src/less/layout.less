@@ -338,7 +338,7 @@ body {
             max-width: @text-width;
             border-bottom: 1px solid #eee;
         }
-
+         
         .article-title {
             margin-bottom: 0;
 
@@ -352,7 +352,7 @@ body {
         background-color: white;
         border-radius: 3px;
         margin-bottom: 1em;
-        overflow: auto;
+       // overflow: auto;
         font-size: 1.2em;
 
         .article-content {
@@ -523,11 +523,19 @@ blockquote p {
 @keyframes down {
     from {
         opacity: 1.0;
-        transform: translate(0,0);
+        transform: translate(0,0); 
     }
 
     to {
         opacity: 0.0;
         transform: translate(0,10px);
+    }
+}
+
+.light-box {
+    display: block;
+
+    &::after {
+        background-color: transparent;
     }
 }

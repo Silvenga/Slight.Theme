@@ -17,9 +17,9 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 
 ## Screenshots
 
-![](//i.imgur.com/C35HBSb.png)
+![](https://i.imgur.com/C35HBSb.png)
 
-![](//i.imgur.com/3Lt5PNg.png)
+![](https://i.imgur.com/3Lt5PNg.png)
 
 ## Change Log
 

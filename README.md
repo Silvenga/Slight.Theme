@@ -1,13 +1,8 @@
 # Slight 
-Version 1.05
-
-Ghost 0.4.2 compatibility
-
-[Theme Download](http://r.silvenga.com/slightdownload)
 
 ## Introduction
 
-A minimal theme, powered by Ghost. Live demo: (https://silvenga.com).
+A minimal theme, powered by Ghost. Live demo: (https://silvenga.com) (using the dev branch).
 
 Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyqian.com/) and Roryg’s Ghostwriter theme (https://github.com/roryg/ghostwriter). 
 
@@ -15,7 +10,6 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 
 * Minimal design to showcase content.
 * Responsive design written in HTML5/LESS.
-* Menu system.
 * Full Ajax transitions between posts.
 * Built in GitHub’s Gist beautifier.
 * Disqus comment support.
@@ -23,13 +17,20 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 
 ## Screenshots
 
-![](http://i.imgur.com/Yib6qzO.png)
+![](//i.imgur.com/C35HBSb.png)
 
-![](http://i.imgur.com/rZaPIdx.png)
-
-![](https://store.silvenga.com/slight-screenshot.png)
+![](//i.imgur.com/3Lt5PNg.png)
 
 ## Change Log
+
+2.0.0 - 9/18/2014
+* Updated for Ghost 0.5.2.
+* Complete code rewrite (CSS, HTML, Javascript).
+* Uses Fluidbox by Terry Mun (http://terrymun.com) to provide seamless lightbox transitions.  
+* Streamlined grunt processing.
+* Significant speed improvements.
+* Source minification improvements.  
+* Squashed dozens of bugs. 
 
 1.0.5 - 6/21/2014
 * Fixed comment issues with loading via ajax.
@@ -62,13 +63,22 @@ To reach optimal size the user must recompile the code after making any edits. E
 * Run `npm install` to ensure that the development environment is ready. 
 * Run `grunt watch` to automatically compile code in the `/Slight` directory. 
 * Modify header and footer links in `./src/default.hbs`.
-* Modify disqus_shortname to your own on line 3 of `./src/js/master.js`.
+* Modify disqus_shortname to your own on line 3 of `./src/js/blob.07.master.js` (or disable Disques with `enable_disques`).
 * Modify links for the menu system in `./src/html/partials/menu.hbs`.
-* Modify links for the sidebar in `./src/html/partials/sidebar.hbs`.
+* If needed run `grunt` or `compile.bat` to force the compiling of all the assets. 
 * Add the Slight folder to `./content/themes` of your Ghost installation
 * Restart Ghost
 * Select theme under that administration tools within Ghost
 * Check out (https://github.com/Silvenga/gist-embed) for tips on using the Gist beautifier.
+
+## Download
+
+Ghost 0.5.2 compatibility
+
+[Latest Stable Theme Download](http://r.silvenga.com/slightdownload)
+
+[Latest Dev Theme Download](http://r.silvenga.com/silvengadownloaddev)
+
 
 ## License
 

@@ -1,8 +1,4 @@
 
-@default: ~"only screen";
-@small-desktop: ~"only screen and (max-width: 1100px)";
-@tablet: ~"only screen and (max-width: 960px)";
-@phone: ~"only screen  and (max-width: 720px)";
 
 @header-color: #607d8b;
 
@@ -25,7 +21,7 @@ html {
 }
 
 body {
-    height: 100%;
+    // height: 100%;
 }
 
 
@@ -34,10 +30,12 @@ body {
 .content {
     @media @default {
         padding: 0 0 1em @sidebar-width;
+        margin-top: 80px;
     }
 
     @media @tablet {
         padding: 0em 1em 1em 1em;
+        margin-top: 0;
     }
 }
 
@@ -47,12 +45,13 @@ body {
         border-right: 1px #eee solid;
         padding: 2em;
         position: fixed;
+        top: 0;
         height: 100%;
+        bottom: 0;
         width: @sidebar-width;
         background-color: white;
-        //box-shadow: inset -5px 0 10px -3px rgba(0,0,0,.2);
         z-index: 10;
-
+        transform: translateZ(0); // fixes: https://code.google.com/p/chromium/issues/detail?id=293926
         h1 {
             margin: 0;
             font-size: 5em;
@@ -98,21 +97,41 @@ body {
 }
 
 .nav-bar {
-    padding: 0 2em;
-    padding-top: 1em;
-    z-index: 2;
+    z-index: 1000;
     margin: auto;
 
+    @media @default {
+        transform: translateZ(0); // fixes: https://code.google.com/p/chromium/issues/detail?id=293926
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        padding: 0 0 0 @sidebar-width;
+    }
+
+    @media @tablet {
+        position: relative;
+        padding: 0 0 0 0;
+    }
+
+    @media @phone {
+        position: relative;
+        padding: 0 0 0 0;
+    }
+
     .nav-container {
-        height: 50px;
-        line-height: 50px;
+        padding: 0 2em;
+        padding-top: 1em;
+        height: 70px;
+        line-height: 70px;
+        border-bottom: 1px #eee solid;
+        background-color: #fff;
 
         a {
             line-height: 22px;
         }
 
         @media @default {
-            border-bottom: 1px #eee solid;
 
             .nav-text {
                 display: inline;
@@ -130,6 +149,10 @@ body {
         }
 
         @media @phone {
+            height: 50px;
+            line-height: 50px;
+            margin-bottom: 5em;
+
             .nav-text {
                 display: block;
                 float: none;
@@ -159,6 +182,8 @@ body {
         }
 
         @media @tablet {
+            height: 50px;
+            line-height: 50px;
             border-bottom: 0px #eee solid;
             text-align: center;
         }
@@ -220,9 +245,7 @@ body {
         padding-top: 1em;
         font-size: 1.1em;
         padding-bottom: 1em;
-        border-bottom: 1px solid #eee;
-
-
+        //border-bottom: 1px solid #eee;
         @media @tablet {
             text-align: center;
         }
@@ -262,6 +285,7 @@ body {
         background: transparent;
         color: @link;
         display: block;
+        border-bottom: 1px solid #eee;
 
         &::after {
             transition: opacity 0.3s, transform 0.3s;
@@ -330,20 +354,24 @@ body {
         font-size: 1.2em;
         width: 100%;
         padding-bottom: 1em;
-
+        margin-top: 6em;
 
         .article-date {
             margin-top: 1.1em;
             padding-bottom: 1.1em;
             max-width: @text-width;
             border-bottom: 1px solid #eee;
+
+            @media @phone {
+                text-align: center;
+            }
         }
-         
+
         .article-title {
             margin-bottom: 0;
 
             @media @phone {
-                margin-top: 1.4em;
+                font-size: 2em;
             }
         }
     }
@@ -352,7 +380,7 @@ body {
         background-color: white;
         border-radius: 3px;
         margin-bottom: 1em;
-       // overflow: auto;
+        // overflow: auto;
         font-size: 1.2em;
 
         .article-content {
@@ -392,12 +420,15 @@ body {
             }
         }
 
+        p {
+            transition: all 100ms;
+        }
+
         .image-p {
             max-width: 100%;
         }
 
         .article-comments {
-            margin-top: 2em;
             padding-top: 2em;
             border-top: 1px solid #eee;
             max-width: @text-width;
@@ -415,6 +446,11 @@ body {
     height: 30px;
     width: 100%;
     margin-bottom: 2em;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 30px;
+    float: left;
 
     .footer-wrapper {
         width: 100%;
@@ -437,7 +473,7 @@ body {
     }
 
     @media @tablet {
-        padding: 0em 1em 2.5em 1em;
+        padding: 0 1em 2.5em 1em;
     }
 }
 
@@ -499,7 +535,7 @@ blockquote p {
 }
 
 .main-container {
-    animation: up ease-in-out 200ms;
+    // animation: up ease-in-out 200ms;
 }
 
 .going-container {
@@ -523,7 +559,7 @@ blockquote p {
 @keyframes down {
     from {
         opacity: 1.0;
-        transform: translate(0,0); 
+        transform: translate(0,0);
     }
 
     to {
@@ -539,3 +575,80 @@ blockquote p {
         background-color: transparent;
     }
 }
+
+@delay: 100ms;
+@flows: 10;
+
+.flow {
+    width: 100%;
+    overflow: hidden;
+}
+
+.flow > * {
+    transform: translateY( (1.618px * 4 * @flows * @flows) + 20px );
+    animation: fdsseq ((@delay*@flows)+@delay) forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+@keyframes fdsseq {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.flow-in(@delay,@flows);
+
+.flow-in(@baseDelay, @n, @i: 1) when (@i =< @n) {
+
+    .flow > :nth-child(@{i}) {
+        //animation-delay: (@i * 200ms);
+        transform: translateY( (1.618px * 4 * @i * @i) + 20px );
+        animation: fdsseq ((@baseDelay*@i)) forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+        //animation-delay: (@i * @baseDelay);
+    }
+
+    .flow-in(@baseDelay,@n, (@i + 1));
+}
+
+/*html {
+
+
+    @media @default {
+        overflow-y: hidden;
+    }
+
+
+    @media @tablet {
+        overflow-y: auto;
+    }
+
+    @media @phone {
+        overflow-y: auto;
+    }
+}
+
+
+main {
+
+    @media @default {
+        overflow-y: scroll;
+        height: 100vh;
+    }
+
+
+    @media @tablet {
+        overflow-y: visible;
+        height: auto;
+    }
+
+    @media @phone {
+        overflow-y: visible;
+        height: auto;
+    }
+}*/
+

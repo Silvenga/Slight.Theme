@@ -8,16 +8,25 @@
             <div class="article-date">
                 {{date format='MMMM DD, YYYY'}}
             </div>
+            <div class="ghost-authed">
+                <div id="ghost-edit-page" class="edit-button link-logo"></div>
+            </div>
         </div>
         <div class="article-container">
-            <div class="article-content ">
+            <div class="article-content flow">
                 {{content}}
             </div>
+            {{#if @@enableDisques}}
             <div class="article-comments">
                 <div id="disqus_thread"></div>
             </div>
+            <script>
+                // Use for the first page load, afterwards everything can be handled in js.
+                var disqus_identifier = '{{post.id}}';
+            </script>
+            {{/if}}
         </div>
     </div>
 </article>
-    {{/post}}
+{{/post}}
 <!--{{!< default}}-->

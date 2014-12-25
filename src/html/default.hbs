@@ -7,7 +7,7 @@
     <meta name="description" content="{{meta_description}}" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="Ghost 0.4" />
+    <meta name="generator" content="Ghost 0.5" />
     <link rel="alternate" type="application/rss+xml" title="{{@blog.title}}" href="/rss/">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 </head>
@@ -25,28 +25,24 @@
         <div id="ajax-content">
             <main class="content">
                 {{> menu}}
-                {{{body}}}
+                <div class="body">
+                    {{{body}}}
+                </div>
                 <div class="hidden full-width">
-                    <script>
-                        // Use for the first page load, afterwards everything can be handled in js.
-                        var disqus_identifier = '{{post.id}}';
-                    </script>
                     <div id="title">{{meta_title}}</div>
                     <div id="page-id">{{post.id}}</div>
                     <div id="page-width"></div>
                 </div>
             </main>
+            <footer class="footer" id="main-footer">
+                <div class="footer-wrapper">
+                    <div class="footer-container">
+                        @@footer
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
-    <footer class="footer" id="main-footer">
-        <div class="footer-wrapper">
-            <div class="footer-container">
-                Copyright &copy; Mark Lopez 2014. <a href="/humble-disclaimer/">My Humble Disclaimer and Privacy Policy</a>.
-                <br>
-                Written under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-            </div>
-        </div>
-    </footer>
     <script async type="text/javascript" src="/assets/js/pack.min.js"></script>
 </body>
 </html>

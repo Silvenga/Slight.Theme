@@ -1,29 +1,42 @@
 <nav class="nav-bar">
     <div class="nav-container">
         <div class="nav-text lefted">
-            <a href="/" class="h3">Browse Posts</a>
-            <a href="/projects/" class="h3">My Projects</a>
-            <a href="/about/" class="h3">About Me</a>
+            {{#if "@@navLink1.text"}}
+            <a href="@@navLink1.link" class="h3">@@navLink1.text</a>
+            {{/if}}
+            {{#if "@@navLink2.text"}}
+            <a href="@@navLink2.link" class="h3">@@navLink2.text</a>
+            {{/if}}
+            {{#if "@@navLink3.text"}}
+            <a href="@@navLink3.link" class="h3">@@navLink3.text</a>
+            {{/if}}
         </div>
         <div class="nav-icons righted">
-            <a href="https://twitter.com/Silvenga">
-                <img alt="Twitter" class="twit-logo img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLz4=" />
+            {{#if "@@twitter-link"}}
+            <a href="@@twitter-link">
+                <img alt="Twitter" class="twit-logo img" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E" />
             </a>
-
-            <a href="https://plus.google.com/+MarkLopez-Silvenga">
-                <img alt="Google+" class="gplus-logo img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLz4=" />
+            {{/if}}
+            {{#if "@@gPlus-link"}}
+            <a href="@@gPlus-link">
+                <img alt="Google+" class="gplus-logo img" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E" />
             </a>
-
-            <a href="https://www.linkedin.com/in/marklopezlink/">
-                <img alt="Linkedin" class="link-logo img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLz4=" />
+            {{/if}}
+            {{#if "@@linkedIn-link"}}
+            <a href="@@linkedIn-link">
+                <img alt="Linkedin" class="link-logo img" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E" />
             </a>
-
-            <a href="https://www.facebook.com/sea.marklopez">
-                <img alt="Facebook" class="face-logo img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLz4=" />
+            {{/if}}
+            {{#if "@@facebook-link"}}
+            <a href="@@facebook-link">
+                <img alt="Facebook" class="face-logo img" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E" />
             </a>
-            <a href="https://github.com/Silvenga">
-                <img alt="Github" class="github-logo img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnLz4=" />
+            {{/if}}
+            {{#if "@@gitHub-link"}}
+            <a href="@@gitHub-link">
+                <img alt="Github" class="github-logo img" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E" />
             </a>
+            {{/if}}
         </div>
     </div>
 </nav>

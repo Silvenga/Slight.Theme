@@ -32,41 +32,72 @@ h1 {
     .HeaderFont;
     font-size: 3em;
     margin: 0.563em 0;
+
+    @media @phone {
+        font-size: 2em;
+        text-align: center;
+    }
 }
 
 h2 {
     .HeaderFont;
     font-size: 2.25em;
     margin: 0.625em 0;
+
+    @media @phone {
+        font-size: 1.8em;
+        text-align: center;
+    }
 }
 
 h3 {
     .HeaderFont;
     font-size: 1.5em;
     margin: 1.313em 0;
+
+    @media @phone {
+        font-size: 1.2em;
+        text-align: center;
+    }
 }
 
 h4 {
     .HeaderFont;
     font-size: 1.313em;
     margin: 1.313em 0;
+
+    @media @phone {
+        font-size: 1.1em;
+        text-align: center;
+    }
 }
 
 h5 {
     .HeaderFont;
     font-size: 1.125em;
     margin: 1.313em 0;
+
+    @media @phone {
+        font-size: 1.1em;
+        text-align: center;
+    }
 }
 
 h6 {
     .HeaderFont;
-    font-size: 1em; 
+    font-size: 1em;
     margin: 0.75em 0;
+
+    @media @phone {
+        font-size: 0.9em;
+        text-align: center;
+    }
 }
 
 code, pre {
     border-radius: 2px;
     padding: 5px 3px;
+    width: 100%;
 
     &:not([data-gist-id]) {
         background: #f1f0ea;

@@ -1,6 +1,6 @@
 {
     "name": "SlightTheme",
-    "version": "1.0.5",
+    "version": "2.1.0",
     "devDependencies": {
         "grunt": "latest",
         "grunt-contrib-uglify": "latest",
@@ -9,8 +9,10 @@
         "grunt-contrib-clean": "latest",
         "grunt-contrib-htmlmin": "latest",
         "grunt-contrib-copy": "latest",
-        "assemble-less": "latest",
+        "grunt-contrib-concat": "latest",
+        "grunt-contrib-less": "latest",
         "grunt-concurrent": "latest",
-        "grunt-autoprefixer": "latest"
+        "grunt-autoprefixer": "latest",
+        "grunt-include-replace": "latest"
     }
 }

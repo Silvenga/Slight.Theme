@@ -1,0 +1,21 @@
+{
+    "footer": "Copyright &copy; Mark Lopez 2014. <a href='/humble-disclaimer/'>My Humble Disclaimer and Privacy Policy</a>.<br>Written under the <a href='https://creativecommons.org/licenses/by-sa/4.0/'>Creative Commons Attribution-ShareAlike 4.0 International License</a>.",
+
+    "enableDisques": true,
+    "disqusShortname": "silvenga-blog-ghost",
+
+    "twitter-link": "https://twitter.com/Silvenga",
+    "gPlus-link": "https://plus.google.com/+MarkLopez-Silvenga",
+    "linkedIn-link": "https://www.linkedin.com/in/marklopezlink/",
+    "facebook-link": "https://www.facebook.com/sea.marklopez",
+    "gitHub-link": "https://github.com/Silvenga",
+
+    "navLink1.text": "Browse Posts",
+    "navLink1.link": "/",
+
+    "navLink2.text": "My Projects",
+    "navLink2.link": "/projects/",
+
+    "navLink3.text": "About Me",
+    "navLink3.link": "/about/"
+}

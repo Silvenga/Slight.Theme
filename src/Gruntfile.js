@@ -3,80 +3,90 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
+            options: {
+                livereload: true
+            },
             html: {
                 files: [
                     'other/*',
                     'html/partials/*',
                     'html/*'
                 ],
-                tasks: ['htmlmin', 'copy', 'clean']
+                tasks: ['task.html']
             },
             less: {
                 files: [
                     'less/*'
                 ],
-                tasks: ['less', 'autoprefixer', 'cssmin']
+                tasks: ['task.less']
             },
             js: {
                 files: [
                     "javascript/*"
                 ],
-                tasks: ['uglify']
+                tasks: ['task.js']
+            },
+            strings: {
+                files: [
+                    "strings.json"
+                ],
+                tasks: ['task.less', 'task.js', 'task.html']
             }
         },
         concurrent: {
-            target1: ['less', 'uglify'],
-            target2: ['autoprefixer', 'htmlmin'],
-            target3: ['cssmin'],
-            target4: ['copy', 'clean']
-        },
-        autoprefixer: {
-            files: {
-                src: 'css/*.css'
-            }
+            target0: ['clean'],
+            target1: ['task.less', 'task.js', 'task.html']
         },
         uglify: {
             options: {
                 mangle: true,
-                sourceMap: true,
-                compress: true,
+                sourceMap: false,
                 preserveComments: false,
-
+                compress: {
+                    unsafe: true
+                },
             },
-            combine_min: {
+            main: {
                 files: {
-                    '<%= theme_name %>/assets/js/pack.min.js':
-                    [
-                        'javascript/blob.*.js'
-                    ]
+                    '<%= theme_name %>/assets/js/pack.min.js': ['tmp/javascript/blob.*.js']
                 }
             }
         },
         less: {
-            components: {
+            main: {
+                options: {
+                    ieCompat: false
+                },
                 files: {
-                    'css/compiled.css': ['less/less_imports.less']
+                    "tmp/css/compiled.css": "less/less_imports.less"
                 }
-            },
+            }
+        },
+        concat: {
             options: {
-                expand: true,
-                paths: [
-                    'less'
-                ]
+            },
+            main: {
+                src: ['less/css/*.css', 'tmp/css/compiled.css'],
+                dest: 'tmp/css/bundle.css',
+            },
+        },
+        autoprefixer: {
+            main: {
+                src: 'tmp/css/bundle.css'
             }
         },
         cssmin: {
-            combine: {
+            main: {
                 options: {
-                    noAggressiveMerging: true
+                    keepSpecialComments: false
                 },
                 files: {
-                    '<%= theme_name %>/assets/css/style.css': ['css/*.css']
+                    '<%= theme_name %>/assets/css/style.css': ['tmp/css/bundle.css']
                 }
             }
         },
         htmlmin: {
-            minify: {
+            main: {
                 options: {
                     removeComments: true,
                     collapseWhitespace: true,
@@ -92,24 +102,40 @@ module.exports = function (grunt) {
                     minifyJS: true,
                     ignoreCustomComments: [/({{!< default}})/i]
                 },
+                files: [
+                  { src: '**/*.hbs', dest: '<%= theme_name %>/', expand: true, cwd: './tmp/html' }
+                ]
+            }
+        },
+        includereplace: {
+            html: {
+                options: {
+                    globals: grunt.file.readJSON('strings.json'),
+                },
+                files: [
+                  { src: 'html/**/*.hbs', dest: 'tmp/', expand: true, cwd: './' }
+                ]
+            },
+            less: {
+                options: {
+                    globals: grunt.file.readJSON('strings.json'),
+                },
                 files: {
-                    '<%= theme_name %>/default.hbs': 'html/default.hbs',
-                    '<%= theme_name %>/error.hbs': 'html/error.hbs',
-                    '<%= theme_name %>/index.hbs': 'html/index.hbs',
-                    '<%= theme_name %>/post.hbs': 'html/post.hbs',
-                    '<%= theme_name %>/partials/menu.hbs': 'html/partials/menu.hbs',
-                    '<%= theme_name %>/partials/pagination.hbs': 'html/partials/pagination.hbs',
-                    '<%= theme_name %>/partials/sidebar.hbs': 'html/partials/sidebar.hbs',
+                    'tmp/css/bundle.css': ['tmp/css/bundle.css']
                 }
+            },
+            js: {
+                options: {
+                    globals: grunt.file.readJSON('strings.json'),
+                },
+                files: [
+                  { src: 'javascript/*.js', dest: 'tmp/', expand: true }
+                ]
             }
         },
         copy: {
             main: {
                 files: [
-//                    {
-//                        src: ['fonts/*'],
-//                        dest: '<%= theme_name %>/assets/'
-//                    },
                     {
                         src: ['images/*'],
                         dest: '<%= theme_name %>/assets/'
@@ -125,21 +151,29 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            css: ["css/compiled.css"],
+            options: {
+                force: true
+            },
+            css: ["tmp"],
         },
-        //'theme_name': "../ghost/content/themes/Slight"
-        'theme_name': "../Slight"
+        'theme_name': "../ghost/content/themes/Slight"
+        //'theme_name': "../Slight"
     });
 
     grunt.registerTask('default', ['concurrent']);
+    grunt.registerTask('task.less', ['less', 'concat', 'includereplace:less', 'autoprefixer', 'cssmin']);
+    grunt.registerTask('task.js', ['includereplace:js', 'uglify']);
+    grunt.registerTask('task.html', ['includereplace:html', 'htmlmin', 'copy']);
 
-    grunt.loadNpmTasks('assemble-less');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-include-replace');
 };

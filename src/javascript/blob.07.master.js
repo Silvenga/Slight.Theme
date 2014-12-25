@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////////
 
-var enable_disques = true;
-var disqus_shortname = 'silvenga-blog-ghost';
+var enable_disques = ("@@enableDisques" == "true");
+var disqus_shortname = '@@disqusShortname';
 
 //////////////////////////////////////////////////
 
@@ -13,18 +13,14 @@ jQuery(function ($) {
     setTimeout(function () {
         (function () {
 
-            // See if we can enable Ajax'ed requests
-            enableAjax();
-
             // Load the javascript for every page
             onLoaded();
 
-            // Prevent flashing when scroll bars apear/hide 
-            //$(window).on("resize", sizeForScroll);
+            // See if we can enable Ajax'ed requests
+            enableAjax();
 
             // Run the scripts after ajax (ajax looses scripts)
             $(document).on("ajax.completed", onLoaded);
-
         }());
     }, 0);
 
@@ -50,12 +46,25 @@ jQuery(function ($) {
     function onLoaded() {
 
         attempt(function () {
-            attachEvents();
+            if (Ghost.isAuthenticated()) {
+                $(".ghost-authed").show();
+                $("#ghost-edit-page").on("click", function () {
+                    Ghost.edit($("#page-id").text());
+                });
+            }
         });
 
-        //attempt(function () {
-        //    sizeForScroll();
-        //});
+        attempt(function () {
+            setTimeout(function () {
+                $(".flow").removeClass("flow");
+            }, (100 * 10));
+
+        });
+
+        attempt(function () {
+            $('.body p img').parent().addClass("image-p");
+            $('.body p code[data-gist-id]').parent().addClass("image-p");
+        });
 
         attempt(function () {
             attachDisqus();
@@ -68,17 +77,11 @@ jQuery(function ($) {
         attempt(function () {
             $('[data-gist-id]').gist();
         });
-
-        attempt(function () {
-            $('p code[data-gist-id]').parent().addClass("image-p");
-        });
     }
 
     function lightBox() {
 
-        $('p img').parent().addClass("image-p");
-
-        $("p img").each(function () {
+        $(".body p img").each(function () {
 
             var $image = $(this);
 
@@ -91,7 +94,7 @@ jQuery(function ($) {
 
         });
 
-        $('a').fluidbox();
+        $('.light-box').fluidbox();
     }
 
     function attempt(func) {
@@ -105,19 +108,6 @@ jQuery(function ($) {
         }, 0);
     }
 
-    function attachEvents() {
-
-        $(".hover-parrent").on("mouseenter", function () {
-
-            $(this).addClass("onhover");
-        });
-
-        $(".hover-parrent").on("mouseleave", function () {
-
-            $(this).removeClass("onhover");
-        });
-    }
-
     function attachDisqus() {
 
         if (enable_disques) {
@@ -128,7 +118,7 @@ jQuery(function ($) {
                 if ($("#disqus_script").length > 0) {
 
                     // if id is seen, then run the comments reset script
-                    DISQUS.reset({
+                    window.DISQUS.reset({
                         reload: true,
                         config: function () {
                             this.page.identifier = $("#page-id").text();
@@ -165,8 +155,11 @@ jQuery(function ($) {
         });
 
         var animation = $.Deferred();
+        var ajax = $.Deferred();
 
-        var ajax = $tempDiv.load(state.url + ' #ajax-content', function (response, status) {
+        $(".main-container").addClass("going-container").removeClass("main-container");
+
+        $tempDiv.load(state.url + ' #ajax-content', function (response, status) {
 
             // Anything happened?
             if (status != "success" && status != "notmodified") {
@@ -180,9 +173,8 @@ jQuery(function ($) {
             document.title = $tempDiv.find("#title").text();
 
             Pace.stop();
+            ajax.resolve();
         });
-
-        $(".main-container").addClass("going-container").removeClass("main-container");
 
         setTimeout(function () {
             animation.resolve();
@@ -191,17 +183,9 @@ jQuery(function ($) {
 
         $.when(animation, ajax).then(function () {
 
-            // $(".main-container").addClass("going-container").removeClass("main-container");
-
-            // setTimeout(function () {
             // Unhide
             $("#main-footer").fadeIn(100);
-            $ajaxContainer.html($tempDiv);
-
-            // Move to top
-            $('html, body').animate({
-                scrollTop: $("#ajax-content").offset().top
-            }, 400);
+            $ajaxContainer.html($tempDiv.html());
 
             // Tell everyone of the new page
             $.event.trigger({
@@ -209,7 +193,11 @@ jQuery(function ($) {
                 title: $("#title").text(),
                 url: state.url
             });
-            // }, 400);
+
+            // Move to top
+            $('html, body').animate({
+                scrollTop: $(".nav-bar").offset().top //- 120
+            }, 400);
         });
     }
 
@@ -233,29 +221,6 @@ jQuery(function ($) {
         }
     }
 
-    //function sizeForScroll() {
-
-    //    var bodyWidth = (hasScrollBar()) ? $(window).width() : $(window).width() - getScrollBarWidth();
-    //    $('body').width(bodyWidth);
-    //}
-
-    //function hasScrollBar() {
-
-    //    return $("body")[0].scrollHeight > $("body")[0].clientHeight;
-    //} 
-
-    //function getScrollBarWidth() {
-
-    //    var scrollTester = document.createElement("div");
-    //    scrollTester.className = "scrollbar-measure";
-    //    document.body.appendChild(scrollTester);
-
-    //    var scrollBarWidth = scrollTester.offsetWidth - scrollTester.clientWidth;
-    //    document.body.removeChild(scrollTester);
-
-    //    return scrollBarWidth;
-    //}
-
     function isExternal(url) {
 
         if (url.indexOf("mailto:") === 0)
@@ -265,8 +230,10 @@ jQuery(function ($) {
 
         if (typeof match[1] === "string" && match[1].length > 0 && match[1].toLowerCase() !== location.protocol)
             return true;
+
         if (typeof match[2] === "string" && match[2].length > 0 && match[2].replace(new RegExp(":(" + { "http:": 80, "https:": 443 }[location.protocol] + ")?$"), "") !== location.host)
             return true;
+
         return false;
     }
 });

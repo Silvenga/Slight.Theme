@@ -95,6 +95,8 @@ jQuery(function ($) {
         });
 
         $('.light-box').fluidbox();
+
+        $(window).resize(); // fixes small images for some reason TODO
     }
 
     function attempt(func) {

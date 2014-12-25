@@ -15,6 +15,16 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 * Disqus comment support.
 * MIT license to customize and distribute.
 
+## Install
+
+To reach optimal size the user must reprocess the code after making any edits. Ensure that NPM is installed and working. 
+
+* Run `npm install` to ensure that the development environment is ready. 
+* Modify any settings in `./strings.json`. To disable a feature, set the value to `""`. 
+* Run `grunt` to process the files and create the theme. 
+* Add the Slight folder to `./content/themes` of your Ghost installation and restart Ghost.
+* Select theme under the administration tools within Ghost.
+
 ## Screenshots
 
 ![](https://i.imgur.com/C35HBSb.png)
@@ -22,6 +32,22 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 ![](https://i.imgur.com/3Lt5PNg.png)
 
 ## Change Log
+
+2.1.0 - 12/24/2014
+* Updated for Ghost 0.5.7
+* Added string dictionary (data is injected during preprocessing) - no more hard coded html strings.
+* Improved to LESS's abilities a little more.
+* Improved size of visual assets.
+* Improved grunt tasks (a lot faster).
+* Improved normalize upgraded to v3.
+* Improved style across all pages.
+* Improved using grunt's less plug-in.
+* Improved comment system can easily be disabled.
+* Fixed race condition if Ajax takes longer than 400ms to load.
+* Fixed flashing/blinking in Chrome.
+* Fixed Social icons being light boxed.
+* Fixed footer to stay at bottom.
+* Fixed images breaking code blocks.
 
 2.0.0 - 9/18/2014
 * Updated for Ghost 0.5.2.
@@ -56,21 +82,6 @@ Created from scratch with inspiration from Ms. Qian’s Crisp theme (http://kathyq
 1.0.0
 * First release. 
 
-## Install
-
-To reach optimal size the user must recompile the code after making any edits. Ensure that NPM is installed and working. 
-
-* Run `npm install` to ensure that the development environment is ready. 
-* Run `grunt watch` to automatically compile code in the `/Slight` directory. 
-* Modify header and footer links in `./src/default.hbs`.
-* Modify disqus_shortname to your own on line 3 of `./src/js/blob.07.master.js` (or disable Disques with `enable_disques`).
-* Modify links for the menu system in `./src/html/partials/menu.hbs`.
-* If needed run `grunt` or `compile.bat` to force the compiling of all the assets. 
-* Add the Slight folder to `./content/themes` of your Ghost installation
-* Restart Ghost
-* Select theme under that administration tools within Ghost
-* Check out (https://github.com/Silvenga/gist-embed) for tips on using the Gist beautifier.
-
 ## Download
 
 Ghost 0.5.2 compatibility
@@ -78,7 +89,6 @@ Ghost 0.5.2 compatibility
 [Latest Stable Theme Download](http://r.silvenga.com/slightdownload)
 
 [Latest Dev Theme Download](http://r.silvenga.com/silvengadownloaddev)
-
 
 ## License
 

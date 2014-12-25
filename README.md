@@ -86,9 +86,9 @@ To reach optimal size the user must reprocess the code after making any edits. E
 
 Ghost 0.5.2 compatibility
 
-[Latest Stable Theme Download](http://r.silvenga.com/slightdownload)
+[Latest Stable Theme Download](http://yourls.silvenga.com/slightdownload)
 
-[Latest Dev Theme Download](http://r.silvenga.com/silvengadownloaddev)
+[Latest Dev Theme Download](http://yourls.silvenga.com/silvengadownloaddev)
 
 ## License
 

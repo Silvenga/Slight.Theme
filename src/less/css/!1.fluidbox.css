@@ -16,7 +16,6 @@
     left: 0;
     bottom: 0;
     right: 0;
-    -webkit-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
 }
 
@@ -25,7 +24,6 @@
     background-size: cover;
     margin: 0 auto;
     position: relative;
-    -webkit-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
 }
 
@@ -33,22 +31,17 @@
     background-size: cover;
     background-position: center center;
     position: absolute;
-    -webkit-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
 }
 
 .fluidbox-closed .fluidbox-ghost {
     -webkit-transition-property: top, left, opacity, -webkit-transform;
     transition-property: top, left, opacity, transform;
-    -webkit-transition-delay: 0, 0, .25s, 0;
     transition-delay: 0, 0, .25s, 0;
 }
 
 .fluidbox-closed .fluidbox-wrap img {
-    -webkit-transition-property: opacity;
     transition-property: opacity;
-    -webkit-transition-delay: .25s;
     transition-delay: .25s;
-    -webkit-transition-duration: 0s;
     transition-duration: 0s;
 }

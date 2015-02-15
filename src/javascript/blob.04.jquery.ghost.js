@@ -4,6 +4,11 @@
 
     var sessionKey = "ghost:session";
 
+    function getLocalStorage(key) {
+        var json = localStorage.getItem(key);
+        return json ? JSON.parse(json) : false;
+    }
+
     window.Ghost = {
         isAuthenticated: function () {
             var session = getLocalStorage(sessionKey);
@@ -16,10 +21,5 @@
             window.location.href = "/ghost/";
         }
     };
-
-    function getLocalStorage(key) {
-        var json = localStorage.getItem(key);
-        return json ? JSON.parse(json) : false;
-    }
 
 })(jQuery);

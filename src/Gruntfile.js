@@ -160,9 +160,9 @@ module.exports = function (grunt) {
         checkPages: {
             dev: {
                 options: {
-                    pageUrls: function () {
-                        return grunt.file.readJSON("links.json");
-                    },
+                    pageUrls: [
+                        "https://silvenga.com"
+                    ],
                     checkLinks: true,
                     noRedirects: true,
                     checkCaching: true,
@@ -181,7 +181,10 @@ module.exports = function (grunt) {
     grunt.registerTask("task.js", ["includereplace:js", "uglify"]);
     grunt.registerTask("task.html", ["includereplace:html", "htmlmin", "copy"]);
 
-    grunt.registerTask("test", ["checkPages:dev"]);
+    grunt.registerTask("test", ["lazyLoadLinks","checkPages:dev"]);
+    grunt.registerTask("lazyLoadLinks", "", function() {
+        grunt.config("checkPages.dev.options.pageUrls", grunt.file.readJSON("links.json"));
+    });
 
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-contrib-watch");

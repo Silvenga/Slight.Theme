@@ -163,8 +163,12 @@ module.exports = function (grunt) {
                     pageUrls: [
                         "https://silvenga.com"
                     ],
+                    linksToIgnore: [
+                        "https://www.facebook.com/sea.marklopez",
+                    ],
+                    userAgent: "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36",
                     checkLinks: true,
-                    noRedirects: true,
+                    noRedirects: false,
                     checkCaching: true,
                     checkCompression: true,
                     maxResponseTime: 1000,
@@ -181,8 +185,8 @@ module.exports = function (grunt) {
     grunt.registerTask("task.js", ["includereplace:js", "uglify"]);
     grunt.registerTask("task.html", ["includereplace:html", "htmlmin", "copy"]);
 
-    grunt.registerTask("test", ["lazyLoadLinks","checkPages:dev"]);
-    grunt.registerTask("lazyLoadLinks", "", function() {
+    grunt.registerTask("test", ["lazyLoadLinks", "checkPages:dev"]);
+    grunt.registerTask("lazyLoadLinks", "", function () {
         grunt.config("checkPages.dev.options.pageUrls", grunt.file.readJSON("links.json"));
     });
 

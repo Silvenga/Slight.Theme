@@ -1,5 +1,7 @@
 # Slight 
 
+[![Build Status](https://jenkins.silvenga.com/job/Blog/badge/icon)](https://jenkins.silvenga.com/job/Blog/)
+
 ## Introduction
 
 A minimal theme, powered by Ghost. Live demo: (https://silvenga.com) (using the dev branch).

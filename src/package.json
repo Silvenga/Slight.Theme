@@ -1,6 +1,11 @@
 {
     "name": "SlightTheme",
-    "version": "2.1.0",
+    "version": "2.1.1",
+    "description": "A minimal theme for Ghost.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Silvenga/Slight-Theme.git"
+    },
     "devDependencies": {
         "grunt": "latest",
         "grunt-contrib-uglify": "latest",
@@ -13,6 +18,7 @@
         "grunt-contrib-less": "latest",
         "grunt-concurrent": "latest",
         "grunt-autoprefixer": "latest",
-        "grunt-include-replace": "latest"
+        "grunt-include-replace": "latest",
+        "grunt-link-checker": "latest"
     }
 }

@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                 preserveComments: false,
                 compress: {
                     unsafe: true
-                },
+                }
             },
             main: {
                 files: {
@@ -68,8 +68,8 @@ module.exports = function (grunt) {
             },
             main: {
                 src: ["less/css/*.css", "tmp/css/compiled.css"],
-                dest: "tmp/css/bundle.css",
-            },
+                dest: "tmp/css/bundle.css"
+            }
         },
         autoprefixer: {
             main: {
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
         includereplace: {
             html: {
                 options: {
-                    globals: grunt.file.readJSON("strings.json"),
+                    globals: grunt.file.readJSON("strings.json")
                 },
                 files: [
                   { src: "html/**/*.hbs", dest: "tmp/", expand: true, cwd: "./" }
@@ -119,7 +119,7 @@ module.exports = function (grunt) {
             },
             less: {
                 options: {
-                    globals: grunt.file.readJSON("strings.json"),
+                    globals: grunt.file.readJSON("strings.json")
                 },
                 files: {
                     'tmp/css/bundle.css': ["tmp/css/bundle.css"]
@@ -127,7 +127,7 @@ module.exports = function (grunt) {
             },
             js: {
                 options: {
-                    globals: grunt.file.readJSON("strings.json"),
+                    globals: grunt.file.readJSON("strings.json")
                 },
                 files: [
                   { src: "javascript/*.js", dest: "tmp/", expand: true }
@@ -155,7 +155,20 @@ module.exports = function (grunt) {
             options: {
                 force: true
             },
-            css: ["tmp"],
+            tmp: ["tmp"]
+        },
+        checkPages: {
+            dev: {
+                options: {
+                    pageUrls: grunt.file.readJSON("links.json"),
+                    checkLinks: true,
+                    noRedirects: true,
+                    checkCaching: true,
+                    checkCompression: true,
+                    maxResponseTime: 1000,
+                    summary: true
+                }
+            }
         },
         //'theme_name': "../ghost/content/themes/Slight"
         'theme_name': "../Slight"
@@ -165,6 +178,8 @@ module.exports = function (grunt) {
     grunt.registerTask("task.less", ["less", "concat", "includereplace:less", "autoprefixer", "cssmin"]);
     grunt.registerTask("task.js", ["includereplace:js", "uglify"]);
     grunt.registerTask("task.html", ["includereplace:html", "htmlmin", "copy"]);
+
+    grunt.registerTask("test", ["checkPages:dev"]);
 
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-contrib-watch");
@@ -177,4 +192,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-concurrent");
     grunt.loadNpmTasks("grunt-autoprefixer");
     grunt.loadNpmTasks("grunt-include-replace");
+    grunt.loadNpmTasks("grunt-check-pages");
 };

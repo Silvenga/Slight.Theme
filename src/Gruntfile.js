@@ -160,7 +160,9 @@ module.exports = function (grunt) {
         checkPages: {
             dev: {
                 options: {
-                    pageUrls: grunt.file.readJSON("links.json"),
+                    pageUrls: function () {
+                        return grunt.file.readJSON("links.json");
+                    },
                     checkLinks: true,
                     noRedirects: true,
                     checkCaching: true,

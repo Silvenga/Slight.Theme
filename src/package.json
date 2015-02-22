@@ -19,6 +19,6 @@
         "grunt-concurrent": "latest",
         "grunt-autoprefixer": "latest",
         "grunt-include-replace": "latest",
-        "grunt-link-checker": "latest"
+        "grunt-check-pages": "latest"
     }
 }

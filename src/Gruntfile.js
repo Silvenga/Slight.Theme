@@ -79,7 +79,8 @@ module.exports = function (grunt) {
         cssmin: {
             main: {
                 options: {
-                    keepSpecialComments: false
+                    keepSpecialComments: false,
+                    report: "min"
                 },
                 files: {
                     '<%= theme_name %>/assets/css/style.css': ["tmp/css/bundle.css"]
@@ -177,6 +178,16 @@ module.exports = function (grunt) {
                 }
             }
         },
+        uncss: {
+            main: {
+                options: {
+                    ignoreSheets: [/github.com/]
+                },
+                files: {
+                    'tmp/css/bundle.css': []
+                }
+            }
+        },
         //'theme_name': "../ghost/content/themes/Slight"
         'theme_name': "../Slight"
     });
@@ -187,8 +198,11 @@ module.exports = function (grunt) {
     grunt.registerTask("task.html", ["includereplace:html", "htmlmin", "copy"]);
 
     grunt.registerTask("test", ["lazyLoadLinks", "checkPages:dev"]);
+    grunt.registerTask("postcss", ["clean", "lazyLoadLinks", "uncss", "cssmin"]);
+
     grunt.registerTask("lazyLoadLinks", "", function () {
         grunt.config("checkPages.dev.options.pageUrls", grunt.file.readJSON("links.json"));
+        grunt.config(["uncss", "main", "files", "tmp/css/bundle.css"], grunt.file.readJSON("links.json"));
     });
 
     grunt.loadNpmTasks("grunt-contrib-less");
@@ -203,4 +217,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-autoprefixer");
     grunt.loadNpmTasks("grunt-include-replace");
     grunt.loadNpmTasks("grunt-check-pages");
+    grunt.loadNpmTasks("grunt-uncss");
 };

@@ -19,6 +19,7 @@
         "grunt-concurrent": "latest",
         "grunt-autoprefixer": "latest",
         "grunt-include-replace": "latest",
-        "grunt-check-pages": "latest"
+        "grunt-check-pages": "latest",
+        "grunt-uncss": "latest"
     }
 }

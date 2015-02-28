@@ -187,6 +187,19 @@ module.exports = function (grunt) {
                     'tmp/css/bundle.css': []
                 }
             }
+        },
+        criticalcss: {
+            custom: {
+                options: {
+                    url: "https://silvenga.com",
+                    width: 320,
+                    height: 640,
+                    outputfile: "critical.css",
+                    filename: "<%= base %>/assets/css/style.css",
+                    buffer: 800 * 1024,
+                    ignoreConsole: false
+                }
+            }
         }
     });
 
@@ -218,4 +231,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-include-replace");
     grunt.loadNpmTasks("grunt-check-pages");
     grunt.loadNpmTasks("grunt-uncss");
+    grunt.loadNpmTasks("grunt-criticalcss");
 };

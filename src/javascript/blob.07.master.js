@@ -94,16 +94,22 @@ jQuery(function ($) {
 
         $tempDiv.load(state.url + " #ajax-content", function (response, status) {
 
-            // Anything happened?
+            //// Anything happened?
             if (status !== "success" && status !== "notmodified") {
 
                 // Bad happened
-                $tempDiv.html("<br>Error? " + status);
-                $(".going-container").addClass("main-container").removeClass("going-container");
-            }
+                var samesiteError = $(response).find("#ajax-content");
 
-            // We are removing title info, get it before its gone.
-            document.title = $tempDiv.find("#title").text();
+                if (samesiteError.length > 0) {
+                    $tempDiv.html(samesiteError);
+                } else {
+                    $tempDiv.html($("<br>Error? " + status));
+                }
+            } else {
+
+                // We are removing title info, get it before its gone.
+                document.title = $tempDiv.find("#title").text();
+            }
 
             Pace.stop();
             ajax.resolve();
@@ -127,8 +133,14 @@ jQuery(function ($) {
             });
 
             // Move to top
-            $("html, body").animate({
-                scrollTop: $(".nav-bar").offset().top //- 120
+            var top = 0;
+            try {
+                top = $(".nav-bar").offset().top;
+            } catch (err) {
+                // Error
+            }
+            $("body").animate({
+                scrollTop: top //- 120
             }, 400);
         });
     }

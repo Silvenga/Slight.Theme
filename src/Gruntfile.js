@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
 
+
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         watch: {
@@ -35,8 +36,7 @@ module.exports = function (grunt) {
         },
         concurrent: {
             target0: ["clean"],
-            target1: ["task.less", "task.js", "task.html"],
-            target2: ["clean"]
+            target1: ["task.less", "task.js", "task.html"]
         },
         uglify: {
             options: {
@@ -49,7 +49,7 @@ module.exports = function (grunt) {
             },
             main: {
                 files: {
-                    '<%= theme_name %>/assets/js/pack.min.js': ["tmp/javascript/blob.*.js"]
+                    '<%= base %>/assets/js/pack.min.js': ["tmp/javascript/blob.*.js"]
                 }
             }
         },
@@ -83,7 +83,7 @@ module.exports = function (grunt) {
                     report: "min"
                 },
                 files: {
-                    '<%= theme_name %>/assets/css/style.css': ["tmp/css/bundle.css"]
+                    '<%= base %>/assets/css/style.css': ["tmp/css/bundle.css"]
                 }
             }
         },
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
                     ignoreCustomComments: [/({{!< default}})/i]
                 },
                 files: [
-                  { src: "**/*.hbs", dest: "<%= theme_name %>/", expand: true, cwd: "./tmp/html" }
+                  { src: "**/*.hbs", dest: "<%= base %>/", expand: true, cwd: "./tmp/html" }
                 ]
             }
         },
@@ -140,14 +140,14 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: ["images/*"],
-                        dest: "<%= theme_name %>/assets/"
+                        dest: "<%= base %>/assets/"
                     },
                     {
                         expand: true,
                         flatten: true,
                         cwd: "raw/",
                         src: "*",
-                        dest: "<%= theme_name %>/"
+                        dest: "<%= base %>/"
                     }
                 ]
             }
@@ -156,7 +156,7 @@ module.exports = function (grunt) {
             options: {
                 force: true
             },
-            tmp: ["tmp"]
+            tmp: ["tmp", "<%= base %>/"]
         },
         checkPages: {
             dev: {
@@ -187,17 +187,17 @@ module.exports = function (grunt) {
                     'tmp/css/bundle.css': []
                 }
             }
-        },
-        //'theme_name': "../ghost/content/themes/Slight"
-        'theme_name': "../Slight"
+        }
     });
+
+    grunt.config("base", (grunt.option("target") == "dev") ? "../ghost/content/themes/Slight" : "../Slight");
 
     grunt.registerTask("default", ["concurrent"]);
     grunt.registerTask("task.less", ["less", "concat", "includereplace:less", "autoprefixer", "cssmin"]);
     grunt.registerTask("task.js", ["includereplace:js", "uglify"]);
     grunt.registerTask("task.html", ["includereplace:html", "htmlmin", "copy"]);
 
-    grunt.registerTask("test", ["lazyLoadLinks", "checkPages:dev"]);
+    grunt.registerTask("test", ["lazyLoadLinks", "checkPages"]);
     grunt.registerTask("postcss", ["clean", "lazyLoadLinks", "uncss", "cssmin"]);
 
     grunt.registerTask("lazyLoadLinks", "", function () {

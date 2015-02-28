@@ -17,5 +17,7 @@
     "navLink2.link": "/projects/",
 
     "navLink3.text": "About Me",
-    "navLink3.link": "/about/"
+    "navLink3.link": "/about/",
+
+    "showLove": true
 }

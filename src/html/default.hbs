@@ -15,10 +15,16 @@
     <header class="header">
         <div class="fade">
             {{#if @blog.logo}}
-            <a href="/"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
+            <a href="/">
+                <img src="{{@blog.logo}}" alt="{{@blog.title}}" />
+            </a>
             {{/if}}
-            <h1><a href="/">{{@blog.title}}</a></h1>
-            <p>{{@blog.description}}</p>
+            <h1>
+                <a href="/">{{@blog.title}}</a>
+            </h1>
+            <p>
+                {{@blog.description}}
+            </p>
         </div>
     </header>
     <div id="ajax-container">
@@ -38,6 +44,10 @@
                 <div class="footer-wrapper">
                     <div class="footer-container">
                         @@footer
+                        {{#if @@showLove}}
+                        <br>
+                        Made with &#10084 by <a href="https://silvenga.com">Silvenga</a>
+                        {{/if}}
                     </div>
                 </div>
             </footer>

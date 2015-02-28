@@ -50,7 +50,7 @@ body {
         bottom: 0;
         width: @sidebar-width;
         background-color: white;
-        z-index: 10;
+        z-index: 1000;
         transform: translateZ(0); // fixes: https://code.google.com/p/chromium/issues/detail?id=293926
         h1 {
             margin: 0;
@@ -97,7 +97,7 @@ body {
 }
 
 .nav-bar {
-    z-index: 1000;
+    z-index: 10;
     margin: auto;
 
     @media @default {
@@ -434,6 +434,10 @@ body {
             max-width: @text-width;
             width: 100%;
             float: left;
+
+            @media @tablet {
+                max-width: none;
+            }
         }
     }
 }
@@ -452,28 +456,30 @@ body {
     margin-top: 30px;
     float: left;
 
+    @media @tablet {
+        padding: 0 1em 2.5em 1em;
+    }
+
     .footer-wrapper {
         width: 100%;
         max-width: 1160px;
         margin: 0 auto;
 
+        @media @tablet {
+            padding: 0 1em 1em;
+        }
+
         .footer-container {
             width: 100%;
             max-width: @text-width;
             text-align: center;
+            margin-bottom: 25px;
 
             @media @tablet {
                 padding: 0 1em;
+                max-width: none;
             }
         }
-
-        @media @tablet {
-            padding: 0 1em 1em;
-        }
-    }
-
-    @media @tablet {
-        padding: 0 1em 2.5em 1em;
     }
 }
 
@@ -499,8 +505,6 @@ code {
     font-size: 1em;
 }
 
-
-
 *:before,
 *:after {
     box-sizing: border-box;
@@ -517,26 +521,9 @@ blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
     margin: 1.5em 10px;
-    padding: 0.5em 10px;
-    quotes: "\201C""\201D""\2018""\2019";
+    padding: 5px 10px;
 }
 
-blockquote:before {
-    color: #ccc;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-}
-
-blockquote p {
-//    display: inline;
-}
-
-.main-container {
-    // animation: up ease-in-out 200ms;
-}
 
 .going-container {
     animation: down ease-in-out 200ms;

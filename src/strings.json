@@ -10,14 +10,5 @@
     "facebook-link": "https://www.facebook.com/sea.marklopez",
     "gitHub-link": "https://github.com/Silvenga",
 
-    "navLink1.text": "Browse Posts",
-    "navLink1.link": "/",
-
-    "navLink2.text": "My Projects",
-    "navLink2.link": "/projects/",
-
-    "navLink3.text": "About Me",
-    "navLink3.link": "/about/",
-
     "showLove": true
 }

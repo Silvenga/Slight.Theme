@@ -165,8 +165,8 @@ module.exports = function (grunt) {
                         "https://silvenga.com"
                     ],
                     linksToIgnore: [
-                        "https://www.linkedin.com/in/marklopezlink/",
-                        "https://www.facebook.com/sea.marklopez"
+                        "https://www.linkedin.com/in/silvenga",
+                        "https://www.facebook.com/silvenga"
                     ],
                     userAgent: "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36",
                     checkLinks: true,

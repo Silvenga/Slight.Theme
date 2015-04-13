@@ -354,7 +354,7 @@ body {
         font-size: 1.2em;
         width: 100%;
         padding-bottom: 1em;
-        margin-top: 6em;
+        /*margin-top: 6em;*/
 
         .article-date {
             margin-top: 1.1em;
@@ -523,8 +523,22 @@ blockquote {
     margin: 1.5em 10px;
     margin-left: -20px;
     padding: 5px 10px;
+    /*animation: blockquote-in ease-in-out 2000ms;*/
 }
 
+@keyframes blockquote-in {
+    0% {
+        margin-left: 20px;
+    }
+
+    50% {
+        margin-left: 20px;
+    }
+
+    100% {
+        margin-left: -20px;
+    }
+}
 
 .going-container {
     animation: down ease-in-out 200ms;
@@ -569,14 +583,17 @@ blockquote {
 
 .flow {
     width: 100%;
+    overflow: visible;
+}
+
+/*.flow > * {
+    transform: translateY( (1.618px * 10 * @flows * @flows) + 10px );
+    animation: fdsseq ((@delay * @flows) + @delay) forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+}*/
+
+.body {
     overflow: hidden;
 }
-
-.flow > * {
-    transform: translateY( (1.618px * 4 * @flows * @flows) + 20px );
-    animation: fdsseq ((@delay*@flows)+@delay) forwards cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
 
 @keyframes fdsseq {
     0% {
@@ -585,58 +602,18 @@ blockquote {
 
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(0);
     }
 }
 
-.flow-in(@delay,@flows);
+.flow-in(@delay, @flows);
 
 .flow-in(@baseDelay, @n, @i: 1) when (@i =< @n) {
 
     .flow > :nth-child(@{i}) {
-        //animation-delay: (@i * 200ms);
-        transform: translateY( (1.618px * 4 * @i * @i) + 20px );
-        animation: fdsseq ((@baseDelay*@i)) forwards cubic-bezier(0.075, 0.82, 0.165, 1);
-        //animation-delay: (@i * @baseDelay);
+        transform: translateY( (1.618px * 10 * @i * @i) + 10px );
+        animation: fdsseq ((@baseDelay * @i)) forwards cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 
-    .flow-in(@baseDelay,@n, (@i + 1));
+    .flow-in(@baseDelay, @n, (@i + 1));
 }
-
-/*html {
-
-
-    @media @default {
-        overflow-y: hidden;
-    }
-
-
-    @media @tablet {
-        overflow-y: auto;
-    }
-
-    @media @phone {
-        overflow-y: auto;
-    }
-}
-
-
-main {
-
-    @media @default {
-        overflow-y: scroll;
-        height: 100vh;
-    }
-
-
-    @media @tablet {
-        overflow-y: visible;
-        height: auto;
-    }
-
-    @media @phone {
-        overflow-y: visible;
-        height: auto;
-    }
-}*/
-

@@ -216,6 +216,7 @@ jQuery(function ($) {
             }
         });
 
+        // Used to fix page styling, now fixes lightbox
         attempt(function () {
             setTimeout(function () {
                 $(".flow").removeClass("flow");

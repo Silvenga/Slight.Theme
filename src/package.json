@@ -1,10 +1,10 @@
 {
     "name": "SlightTheme",
-    "version": "2.1.1",
+    "version": "2.3.0",
     "description": "A minimal theme for Ghost.",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Silvenga/Slight-Theme.git"
+        "url": "https://github.com/Silvenga/Slight.Theme.git"
     },
     "devDependencies": {
         "grunt": "latest",

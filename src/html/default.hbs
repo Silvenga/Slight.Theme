@@ -9,16 +9,26 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="alternate" type="application/rss+xml" title="{{@blog.title}}" href="/rss/">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+    {{ghost_head}}
+    <!--<link rel="stylesheet" type="text/css" href="/assets/css/style.css">-->
+    <style>
+        @import url('/assets/css/style.css');
+    </style>
 </head>
 <body class="{{body_class}}">
     <header class="header">
         <div class="fade">
             {{#if @blog.logo}}
-            <a href="/"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
+            <a href="/">
+                <img src="{{@blog.logo}}" alt="{{@blog.title}}" />
+            </a>
             {{/if}}
-            <h1><a href="/">{{@blog.title}}</a></h1>
-            <p>{{@blog.description}}</p>
+            <h1>
+                <a href="/">{{@blog.title}}</a>
+            </h1>
+            <p>
+                {{@blog.description}}
+            </p>
         </div>
     </header>
     <div id="ajax-container">
@@ -38,11 +48,16 @@
                 <div class="footer-wrapper">
                     <div class="footer-container">
                         @@footer
+                        {{#if @@showLove}}
+                        <br>
+                        Made with &#10084 by <a href="https://silvenga.com">Silvenga</a>
+                        {{/if}}
                     </div>
                 </div>
             </footer>
         </div>
     </div>
     <script async type="text/javascript" src="/assets/js/pack.min.js"></script>
+    {{ghost_foot}}
 </body>
 </html>

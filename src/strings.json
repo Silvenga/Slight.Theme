@@ -6,16 +6,9 @@
 
     "twitter-link": "https://twitter.com/Silvenga",
     "gPlus-link": "https://plus.google.com/+MarkLopez-Silvenga",
-    "linkedIn-link": "https://www.linkedin.com/in/marklopezlink/",
-    "facebook-link": "https://www.facebook.com/sea.marklopez",
+    "linkedIn-link": "https://www.linkedin.com/in/silvenga",
+    "facebook-link": "https://www.facebook.com/silvenga",
     "gitHub-link": "https://github.com/Silvenga",
 
-    "navLink1.text": "Browse Posts",
-    "navLink1.link": "/",
-
-    "navLink2.text": "My Projects",
-    "navLink2.link": "/projects/",
-
-    "navLink3.text": "About Me",
-    "navLink3.link": "/about/"
+    "showLove": true
 }

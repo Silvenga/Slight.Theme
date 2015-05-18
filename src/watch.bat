@@ -1,1 +1,2 @@
-grunt watch
+
+grunt watch --target=dev

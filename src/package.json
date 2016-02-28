@@ -1,26 +1,27 @@
 {
-    "name": "SlightTheme",
-    "version": "2.3.0",
-    "description": "A minimal theme for Ghost.",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Silvenga/Slight.Theme.git"
-    },
-    "devDependencies": {
-        "grunt": "latest",
-        "grunt-contrib-uglify": "latest",
-        "grunt-contrib-cssmin": "latest",
-        "grunt-contrib-watch": "latest",
-        "grunt-contrib-clean": "latest",
-        "grunt-contrib-htmlmin": "latest",
-        "grunt-contrib-copy": "latest",
-        "grunt-contrib-concat": "latest",
-        "grunt-contrib-less": "latest",
-        "grunt-concurrent": "latest",
-        "grunt-autoprefixer": "latest",
-        "grunt-include-replace": "latest",
-        "grunt-check-pages": "latest",
-        "grunt-uncss": "latest",
-        "grunt-criticalcss": "latest"
-    }
+  "name": "SlightTheme",
+  "version": "2.3.0",
+  "description": "A minimal theme for Ghost.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Silvenga/Slight.Theme.git"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "latest",
+    "grunt-check-pages": "latest",
+    "grunt-cli": "^0.1.13",
+    "grunt-concurrent": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-htmlmin": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-criticalcss": "latest",
+    "grunt-include-replace": "latest",
+    "grunt-uncss": "latest"
+  }
 }

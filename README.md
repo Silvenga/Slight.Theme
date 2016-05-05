@@ -1,6 +1,8 @@
+![Slight](docs/images/icon.png)
+
 # Slight 2.3.0
 
-[![Build Status](https://img.shields.io/teamcity/https/teamcity.silvenga.com/e/Blog_Build.svg?label=teamcity&style=flat-square)](https://teamcity.silvenga.com/viewType.html?buildTypeId=Blog_Build&guest=1)
+[![Build Status](https://img.shields.io/teamcity/https/teamcity.silvenga.com/e/Blog_Build.svg?label=teamcity&style=flat-square&maxAge=2592000)](https://teamcity.silvenga.com/viewType.html?buildTypeId=Blog_Build&guest=1)
 
 ## Introduction
 

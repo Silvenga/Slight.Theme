@@ -36,7 +36,8 @@ module.exports = function (grunt) {
         },
         concurrent: {
             target0: ["clean"],
-            target1: ["task.less", "task.js", "task.html"]
+            target1: ["task.less", "task.js", "task.html"],
+            target2: ["task.amp"]
         },
         uglify: {
             options: {

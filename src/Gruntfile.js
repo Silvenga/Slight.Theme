@@ -105,7 +105,7 @@ module.exports = function (grunt) {
                     ignoreCustomComments: [/({{!< default}})/i]
                 },
                 files: [
-                  { src: "**/*.hbs", dest: "<%= base %>/", expand: true, cwd: "./tmp/html" }
+                    { src: ["**/*.hbs", "!**/amp.hbs"], dest: "<%= base %>/", expand: true, cwd: "./tmp/html" }
                 ]
             }
         },
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
                     globals: grunt.file.readJSON("strings.json")
                 },
                 files: [
-                  { src: "html/**/*.hbs", dest: "tmp/", expand: true, cwd: "./" }
+                    { src: "html/**/*.hbs", dest: "tmp/", expand: true, cwd: "./" }
                 ]
             },
             less: {
@@ -131,8 +131,18 @@ module.exports = function (grunt) {
                     globals: grunt.file.readJSON("strings.json")
                 },
                 files: [
-                  { src: "javascript/*.js", dest: "tmp/", expand: true }
+                    { src: "javascript/*.js", dest: "tmp/", expand: true }
                 ]
+            },
+            amp: {
+                options: {
+                    globals: {
+                        ampCss: "not set yet"
+                    }
+                },
+                files: {
+                    "<%= base %>/amp.hbs": ["<%= base %>/amp.hbs"]
+                }
             }
         },
         copy: {
@@ -148,6 +158,14 @@ module.exports = function (grunt) {
                         cwd: "raw/",
                         src: "*",
                         dest: "<%= base %>/"
+                    }
+                ]
+            },
+            amp: {
+                files: [
+                    {
+                        src: "html/amp.hbs",
+                        dest: "<%= base %>/amp.hbs"
                     }
                 ]
             }
@@ -203,12 +221,13 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.config("base", (grunt.option("target") == "dev") ? "../ghost/content/themes/Slight" : "../Slight");
+    grunt.config("base", (grunt.option("target") == "dev") ? "../server/content/themes/Slight" : "../Slight");
 
     grunt.registerTask("default", ["concurrent"]);
     grunt.registerTask("task.less", ["less", "concat", "includereplace:less", "autoprefixer", "cssmin"]);
     grunt.registerTask("task.js", ["includereplace:js", "uglify"]);
-    grunt.registerTask("task.html", ["includereplace:html", "htmlmin", "copy"]);
+    grunt.registerTask("task.html", ["includereplace:html", "htmlmin", "copy:main"]);
+    grunt.registerTask("task.amp", ["copy:amp", "lazyLoadCss", "includereplace:amp"]);
 
     grunt.registerTask("test", ["lazyLoadLinks", "checkPages"]);
     grunt.registerTask("postcss", ["clean", "lazyLoadLinks", "uncss", "cssmin"]);
@@ -216,6 +235,10 @@ module.exports = function (grunt) {
     grunt.registerTask("lazyLoadLinks", "", function () {
         grunt.config("checkPages.dev.options.pageUrls", grunt.file.readJSON("links.json"));
         grunt.config(["uncss", "main", "files", "tmp/css/bundle.css"], grunt.file.readJSON("links.json"));
+    });
+
+    grunt.registerTask("lazyLoadCss", "", function () {
+        grunt.config("includereplace.amp.options.globals.ampCss", grunt.file.read(grunt.config.get("base") + "/assets/css/style.css"));
     });
 
     grunt.loadNpmTasks("grunt-contrib-less");
